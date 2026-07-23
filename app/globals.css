@@ -1,26 +1,57 @@
 @import "tailwindcss";
+@import "pretendard/dist/web/variable/pretendardvariable.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-cream: #f5f1e8;
+  --color-ink: #2c2c2a;
+  --color-celadon: #4a8577;
+  --color-terracotta: #b36b4a;
+
+  --color-oheng-wood: #5b8c5a;
+  --color-oheng-fire: #b8543a;
+  --color-oheng-earth: #c9a15a;
+  --color-oheng-metal: #d6d0c4;
+  --color-oheng-water: #3b5b78;
+
+  --accent: var(--color-celadon);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--color-cream);
+  --color-ink: var(--color-ink);
+  --color-celadon: var(--color-celadon);
+  --color-terracotta: var(--color-terracotta);
+  --color-oheng-wood: var(--color-oheng-wood);
+  --color-oheng-fire: var(--color-oheng-fire);
+  --color-oheng-earth: var(--color-oheng-earth);
+  --color-oheng-metal: var(--color-oheng-metal);
+  --color-oheng-water: var(--color-oheng-water);
+  --color-accent: var(--accent);
+
+  --font-heading: var(--font-noto-serif-kr);
+  --font-body: "PretendardVariable", var(--font-noto-serif-kr), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overscroll-behavior-y: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
