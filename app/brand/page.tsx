@@ -35,6 +35,18 @@ export default function BrandPage() {
         </div>
       </section>
 
+      <section className="px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-8 text-center">
+            <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-pine">BRAND FILM</p>
+            <h2 className="mt-4 font-heading text-3xl font-semibold text-ink">좋은 흐름이 풍경이 되는 순간</h2>
+          </div>
+          <video className="aspect-video w-full rounded-[1.5rem] bg-pine object-cover shadow-sm" controls playsInline preload="metadata" poster="/images/chaeun-hero-landscape.png">
+            <source src="/videos/chaeun-flow.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
       <section className="px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
         <div className="mx-auto max-w-6xl">
           <ScrollReveal className="max-w-xl">

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef } from "react";
 import { motion } from "motion/react";
 import { NatureIcon, type NatureIconName } from "@/components/ui/NatureIcons";
 import { BrandMark } from "@/components/ui/BrandMark";
@@ -25,16 +25,9 @@ const collection = [
   { title: "고요한 침실", caption: "평온이 오래 머무는 자리", image: "/images/space-bedroom.png" },
 ];
 
-const energies = [
-  { key: "wood", ko: "목", title: "성장의 기운", copy: "소나무의 생명력을 서재와 거실에 두어 새로운 시작을 북돋습니다." },
-  { key: "water", ko: "수", title: "순환의 기운", copy: "물과 안개의 흐름으로 막힌 마음을 풀고 공간에 여유를 더합니다." },
-  { key: "earth", ko: "토", title: "안정의 기운", copy: "산과 돌의 중심을 생활의 자리에 들여 편안한 균형을 만듭니다." },
-  { key: "fire", ko: "화", title: "온기의 기운", copy: "해와 따뜻한 색을 더해 관계와 일상에 생기를 불러옵니다." },
-  { key: "metal", ko: "금", title: "정돈의 기운", copy: "맑은 빛과 단정한 여백으로 집중과 결실의 흐름을 돕습니다." },
-];
-
 export function HomePage() {
-  const [energy, setEnergy] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const moveSlider = (direction: number) => sliderRef.current?.scrollBy({ left: direction * Math.min(window.innerWidth * 0.72, 620), behavior: "smooth" });
 
   return (
     <main className="overflow-x-clip">
@@ -69,20 +62,13 @@ export function HomePage() {
       <section id="collection" className="collection-section" aria-labelledby="collection-title">
         <div className="section-intro">
           <span>02 — FOR YOUR SPACE</span>
-          <h2 id="collection-title">풍경에서 오브제까지,<br />일상을 채우는 방법</h2>
-          <p>화면 속 풍경을 작품과 선물, 오래 곁에 둘 오브제로 이어갑니다.</p>
+          <h2 id="collection-title">큰 결정을 하는 사람들은<br />왜 벽의 풍경을 고를까요?</h2>
+          <p>오래전부터 집과 집무실의 그림은 단순한 장식이 아니었습니다. 산은 든든한 배경을, 물은 막힘없는 순환을, 소나무는 오래가는 성장을 상징했습니다.</p>
         </div>
-        <div className="collection-track no-scrollbar">
-          {collection.map((item, index) => (
-            <article className="collection-card" key={item.title}>
-              <div className="collection-image">
-                <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 78vw, 42vw" />
-              </div>
-              <div><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.caption}</p></div>
-            </article>
-          ))}
+        <div className="fortune-story">
+          <p>성공한 이들이 중요한 공간에 작품을 신중히 두는 이유도 여기에 있습니다. 매일 시선이 머무는 풍경이 마음의 방향을 다듬고, 공간의 인상과 기운을 결정한다고 믿기 때문입니다.</p>
+          <p>CHAEUN은 그 오래된 풍수의 지혜를 오늘의 미감으로 번역합니다. 당신의 사주에 필요한 흐름을 읽고, 살아갈 공간에 어울리는 한 점의 풍경으로 완성합니다.</p>
         </div>
-        <p className="swipe-hint">옆으로 넘겨 둘러보세요 <span>→</span></p>
       </section>
 
       <section className="lifestyle-section">
@@ -93,29 +79,25 @@ export function HomePage() {
           <span>03 — A BETTER RHYTHM</span>
           <h2>좋은 공간은<br />하루의 리듬을 바꿉니다.</h2>
           <p>그림을 바라보는 짧은 순간, 방 안에 흐르는 빛과 바람, 조금 더 편안해진 마음. CHAEUN은 작품보다 그 작품과 함께 살아갈 시간을 먼저 생각합니다.</p>
-          <Link className="outline-link" href="/store">공간별 풍경 둘러보기</Link>
         </div>
+        <Link className="lifestyle-link" href="/store">공간별 풍경 둘러보기 <span>↗</span></Link>
       </section>
 
-      <section className="energy-section" aria-labelledby="energy-title">
+      <section className="slider-section" aria-labelledby="slider-title">
         <div className="section-intro">
-          <span>04 — YOUR ENERGY</span>
-          <h2 id="energy-title">나에게 필요한 기운이<br />공간에 머무는 방식</h2>
-          <p>사주는 사람의 흐름을 읽고, 풍수는 공간의 흐름을 만듭니다. CHAEUN은 둘을 당신의 미감에 맞는 풍경으로 연결합니다.</p>
+          <span>04 — THE COLLECTION</span>
+          <h2 id="slider-title">풍경에서 오브제까지,<br />일상을 채우는 방법</h2>
         </div>
-        <div className="energy-stage">
-          <Image src="/images/home-flow-house.png" alt="산과 물 사이의 집으로 다섯 기운이 흘러드는 점묘 일러스트" fill sizes="100vw" />
-          <div className="energy-note" aria-live="polite">
-            <span>{energies[energy].ko}</span>
-            <h3>{energies[energy].title}</h3>
-            <p>{energies[energy].copy}</p>
-          </div>
+        <div className="slider-controls">
+          <button onClick={() => moveSlider(-1)} aria-label="이전 컬렉션">←</button>
+          <button onClick={() => moveSlider(1)} aria-label="다음 컬렉션">→</button>
         </div>
-        <div className="energy-tabs" role="tablist" aria-label="오행의 기운">
-          {energies.map((item, index) => (
-            <button key={item.key} role="tab" aria-selected={energy === index} onClick={() => setEnergy(index)}>
-              <span>{item.ko}</span>{item.title.replace("의 기운", "")}
-            </button>
+        <div ref={sliderRef} className="collection-track no-scrollbar">
+          {collection.map((item, index) => (
+            <article className="collection-card" key={item.title}>
+              <div className="collection-image"><Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 82vw, 42vw" /></div>
+              <div><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.caption}</p></div>
+            </article>
           ))}
         </div>
         <div className="energy-cta">
@@ -125,11 +107,13 @@ export function HomePage() {
       </section>
 
       <footer className="site-footer">
-        <div className="footer-mark"><BrandMark /><p>좋은 터에서 발견한 흐름을<br />당신의 취향으로 그려 공간에 채웁니다.</p></div>
-        <nav aria-label="하단 메뉴">
-          <Link href="/brand">Brand</Link><Link href="/store">Collection</Link><Link href="/create">Create</Link>
-        </nav>
-        <div className="footer-bottom"><span>© 2026 CHAEUN</span><span>SEOUL · KOREA</span><span>Fill Your Space.</span></div>
+        <Image src="/images/chaeun-hero-landscape.png" alt="" fill sizes="100vw" />
+        <div className="footer-content">
+          <p>사주의 흐름을 읽고, 풍수의 원리를 담아<br />당신만의 풍경을 완성합니다.</p>
+          <BrandMark />
+          <Link href="/create">나의 풍경 만들기 <span>→</span></Link>
+          <div className="footer-bottom"><span>© 2026 CHAEUN</span><nav aria-label="하단 메뉴"><Link href="/brand">Brand</Link><Link href="/store">Collection</Link></nav></div>
+        </div>
       </footer>
     </main>
   );

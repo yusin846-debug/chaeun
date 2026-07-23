@@ -128,6 +128,12 @@ a, button { outline-offset: 5px; }
 }
 .section-intro > p { margin: 1.6rem auto 0; max-width: 560px; color: rgb(37 37 37 / .58); line-height: 1.8; }
 .collection-section { padding: 12rem 0 9rem; }
+.fortune-story { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 8vw, 8rem); margin: 0 auto; max-width: 1080px; padding: 0 2rem; border-top: 1px solid rgb(46 70 63 / .18); }
+.fortune-story p { padding-top: 2rem; color: rgb(37 37 37 / .67); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 2; }
+.slider-section { padding: 11rem 0 9rem; }
+.slider-controls { display: flex; justify-content: flex-end; gap: .6rem; margin: -2rem auto 1.5rem; max-width: 1280px; padding: 0 1.5rem; }
+.slider-controls button { display: grid; width: 3rem; aspect-ratio: 1; place-items: center; border: 1px solid rgb(46 70 63 / .25); border-radius: 50%; color: var(--color-pine); cursor: pointer; transition: .2s; }
+.slider-controls button:hover { background: var(--color-pine); color: var(--color-paper); }
 .collection-track { display: flex; gap: 1.5rem; overflow-x: auto; padding: 0 max(1.5rem, calc((100vw - 1280px) / 2)); scroll-snap-type: x mandatory; }
 .collection-card { flex: 0 0 min(42vw, 580px); scroll-snap-align: center; }
 .collection-image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--color-mist); }
@@ -139,12 +145,15 @@ a, button { outline-offset: 5px; }
 .collection-card p { margin-top: .3rem; color: rgb(37 37 37 / .52); font-size: .8rem; }
 .swipe-hint { margin: 2.5rem auto 0; max-width: 1280px; padding: 0 1.5rem; color: rgb(37 37 37 / .44); font-size: .72rem; }
 
-.lifestyle-section { display: grid; min-height: 100svh; grid-template-columns: 1.45fr .8fr; background: #ebe7dd; }
-.lifestyle-image { position: relative; min-height: 75svh; }
-.lifestyle-image img { object-fit: cover; }
-.lifestyle-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem, 7vw, 8rem); }
-.lifestyle-copy h2 { font-size: clamp(2.6rem, 4.5vw, 5.5rem); }
-.lifestyle-copy p { margin: 2rem 0 2.6rem; color: rgb(37 37 37 / .62); line-height: 1.9; }
+.lifestyle-section { position: relative; min-height: min(78vw, 900px); overflow: hidden; background: #ebe7dd; color: var(--color-paper); }
+.lifestyle-section::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgb(18 29 26 / .66), rgb(18 29 26 / .08) 64%, rgb(18 29 26 / .18)); content: ""; }
+.lifestyle-image { position: absolute; inset: 0; }
+.lifestyle-image img { object-fit: contain; background: #d9d5ca; }
+.lifestyle-copy { position: relative; z-index: 2; display: grid; min-height: min(78vw, 900px); grid-template-columns: 1fr 1fr; align-content: end; gap: 5vw; padding: clamp(3rem, 7vw, 7rem); }
+.lifestyle-copy > span { position: absolute; top: clamp(2rem, 5vw, 5rem); left: clamp(2rem, 7vw, 7rem); color: var(--color-paper); }
+.lifestyle-copy h2 { align-self: end; color: var(--color-paper); font-size: clamp(2.8rem, 5vw, 6rem); }
+.lifestyle-copy p { align-self: end; margin: 0 0 .5rem; max-width: 520px; color: rgb(246 244 238 / .86); line-height: 1.9; }
+.lifestyle-link { position: absolute; z-index: 3; right: clamp(2rem, 7vw, 7rem); bottom: 2rem; border-bottom: 1px solid rgb(246 244 238 / .65); padding-bottom: .5rem; font-size: .75rem; }
 .outline-link { align-self: flex-start; border: 1px solid rgb(46 70 63 / .35); border-radius: 999px; padding: .9rem 1.35rem; color: var(--color-pine); font-size: .78rem; }
 
 .energy-section { padding: 12rem 0 0; }
@@ -162,11 +171,13 @@ a, button { outline-offset: 5px; }
 .energy-cta p { color: var(--color-pine); font-family: var(--font-heading); font-size: clamp(2.3rem, 5vw, 5rem); line-height: 1.05; }
 .primary-link { display: flex; gap: 2.5rem; border-radius: 999px; background: var(--color-terracotta); padding: 1rem 1.4rem; color: var(--color-paper); font-size: .8rem; }
 
-.site-footer { border-top: 1px solid rgb(46 70 63 / .14); padding: 5rem max(1.5rem, calc((100vw - 1280px) / 2)) 2rem; }
-.footer-mark { display: flex; align-items: end; justify-content: space-between; }
-.footer-mark p { color: rgb(37 37 37 / .48); font-size: .78rem; line-height: 1.7; text-align: right; }
-.site-footer nav { display: flex; gap: clamp(2rem, 7vw, 7rem); margin: 6rem 0; color: var(--color-pine); font-family: var(--font-logo); font-size: clamp(2rem, 5vw, 5.5rem); }
-.footer-bottom { display: flex; justify-content: space-between; color: rgb(37 37 37 / .38); font-size: .6rem; letter-spacing: .15em; }
+.site-footer { position: relative; min-height: 360px; overflow: hidden; border-top: 1px solid rgb(46 70 63 / .12); }
+.site-footer > img { z-index: 0; object-fit: cover; object-position: center 62%; opacity: .38; }
+.footer-content { position: relative; z-index: 1; display: flex; min-height: 360px; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.footer-content > p { margin-bottom: 1rem; color: var(--color-pine); font-family: var(--font-heading); font-size: clamp(.9rem, 1.4vw, 1.15rem); font-weight: 600; line-height: 1.65; }
+.footer-content > a { display: flex; min-width: 210px; justify-content: space-between; margin-top: 1rem; border-radius: .5rem; background: var(--color-pine); padding: .8rem 1rem; color: var(--color-paper); font-size: .72rem; }
+.footer-bottom { position: absolute; right: 2rem; bottom: 1.25rem; left: 2rem; display: flex; justify-content: space-between; color: rgb(37 37 37 / .45); font-size: .58rem; letter-spacing: .12em; }
+.footer-bottom nav { display: flex; gap: 1.5rem; }
 
 @media (max-width: 760px) {
   .hero-orbit { min-height: 92svh; }
@@ -176,10 +187,15 @@ a, button { outline-offset: 5px; }
   .orbit-item svg { width: 1.5rem; }
   .orbit-item span { display: none; }
   .collection-section { padding: 8rem 0 7rem; }
+  .fortune-story { grid-template-columns: 1fr; gap: 0; }
+  .slider-section { padding: 8rem 0 6rem; }
   .collection-card { flex-basis: 78vw; }
-  .lifestyle-section { display: block; }
-  .lifestyle-image { min-height: 67svh; }
-  .lifestyle-copy { padding: 4.5rem 1.5rem 6rem; }
+  .lifestyle-section, .lifestyle-copy { min-height: 78svh; }
+  .lifestyle-image img { object-fit: cover; object-position: 58% center; }
+  .lifestyle-copy { display: flex; justify-content: flex-end; padding: 5rem 1.5rem 6rem; }
+  .lifestyle-copy > span { top: 2rem; left: 1.5rem; }
+  .lifestyle-copy p { margin-top: 1.5rem; }
+  .lifestyle-link { right: 1.5rem; bottom: 2rem; }
   .energy-section { padding-top: 8rem; }
   .energy-stage { aspect-ratio: 3 / 4; }
   .energy-stage > img { object-position: 50% center; }
@@ -188,9 +204,6 @@ a, button { outline-offset: 5px; }
   .energy-tabs button { flex: 0 0 auto; }
   .energy-cta { display: block; margin: 5rem auto; }
   .primary-link { margin-top: 2rem; }
-  .footer-mark { display: block; }
-  .footer-mark p { margin-top: 2rem; text-align: left; }
-  .site-footer nav { flex-direction: column; gap: .5rem; margin: 4rem 0; }
   .footer-bottom { gap: 1rem; flex-wrap: wrap; }
 }
 
