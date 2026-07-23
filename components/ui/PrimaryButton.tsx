@@ -13,9 +13,9 @@ interface PrimaryButtonProps extends NativeButtonProps {
 }
 
 const VARIANT_CLASS: Record<NonNullable<PrimaryButtonProps["variant"]>, string> = {
-  primary: "bg-celadon text-cream",
+  primary: "bg-pine text-paper",
   secondary: "bg-terracotta text-cream",
-  ghost: "bg-transparent text-ink border border-ink/20",
+  ghost: "bg-transparent text-ink border border-mist",
 };
 
 export function PrimaryButton({
@@ -29,7 +29,7 @@ export function PrimaryButton({
       whileTap={{ scale: 0.96 }}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.15 }}
-      className={`rounded-full px-6 py-3 text-sm font-medium shadow-sm transition-shadow hover:shadow-md disabled:opacity-40 ${VARIANT_CLASS[variant]} ${className}`}
+      className={`min-h-14 rounded-full px-6 py-3 text-sm font-medium tracking-[-0.01em] shadow-sm transition-[box-shadow,transform,background-color] duration-200 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-40 ${VARIANT_CLASS[variant]} ${className}`}
       {...props}
     >
       {children}
