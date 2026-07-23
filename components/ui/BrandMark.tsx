@@ -21,10 +21,10 @@ export function BrandMark({ compact = false, light = false }: BrandMarkProps) {
   return (
     <Link href="/" aria-label="CHAEUN 홈" className="group inline-flex items-center">
       <Image
-        src="/images/chaeun-logo-official.png"
+        src="/images/chaeun-logo-official-transparent.png"
         alt="CHAEUN — Fill Your Space."
-        width={159}
-        height={189}
+        width={190}
+        height={187}
         priority={compact}
         className={`${compact ? "h-[74px] w-auto sm:h-[82px]" : "h-[150px] w-auto"} object-contain transition-transform duration-300 group-hover:scale-[1.02] ${light ? "brightness-105" : ""}`}
       />
