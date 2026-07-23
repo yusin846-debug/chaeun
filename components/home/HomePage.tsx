@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useState } from "react";
+import { motion } from "motion/react";
 import { NatureIcon, type NatureIconName } from "@/components/ui/NatureIcons";
 import { BrandMark } from "@/components/ui/BrandMark";
 
@@ -34,11 +34,7 @@ const energies = [
 ];
 
 export function HomePage() {
-  const filmRef = useRef<HTMLElement>(null);
   const [energy, setEnergy] = useState(0);
-  const { scrollYProgress } = useScroll({ target: filmRef, offset: ["start end", "end start"] });
-  const filmScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.02, 1.12]);
-  const filmRadius = useTransform(scrollYProgress, [0, 0.45], [36, 0]);
 
   return (
     <main className="overflow-x-clip">
@@ -65,30 +61,14 @@ export function HomePage() {
           <p className="eyebrow">SAJU · PUNGSU · ART</p>
           <h1 id="hero-title">좋은 흐름을<br />당신의 공간에.</h1>
           <p>사주의 흐름을 읽고, 풍수의 원리를 담아<br className="hidden sm:block" /> 복이 머무는 하나의 풍경을 그립니다.</p>
-          <Link className="text-link" href="#film">CHAEUN을 경험하기 <span>↓</span></Link>
+          <Link className="text-link" href="#collection">CHAEUN을 경험하기 <span>↓</span></Link>
         </motion.div>
         <span className="hero-index">01 — FLOW</span>
       </section>
 
-      <section id="film" ref={filmRef} className="film-section">
+      <section id="collection" className="collection-section" aria-labelledby="collection-title">
         <div className="section-intro">
-          <span>02 — THE STORY</span>
-          <h2>좋은 터에서 시작된<br />하나의 풍경</h2>
-        </div>
-        <motion.div className="film-frame" style={{ scale: filmScale, borderRadius: filmRadius }}>
-          <video autoPlay muted loop playsInline preload="metadata" poster="/images/chaeun-hero-landscape.png" aria-label="한국의 자연과 CHAEUN 풍경 작품이 공간으로 이어지는 브랜드 영상">
-            <source src="/videos/chaeun-flow.mp4" type="video/mp4" />
-          </video>
-          <div className="film-overlay">
-            <p>산이 품고, 물이 흐르고,<br />바람이 머무는 곳.</p>
-            <Link href="/brand">브랜드 이야기 보기 <span>↗</span></Link>
-          </div>
-        </motion.div>
-      </section>
-
-      <section className="collection-section" aria-labelledby="collection-title">
-        <div className="section-intro">
-          <span>03 — FOR YOUR SPACE</span>
+          <span>02 — FOR YOUR SPACE</span>
           <h2 id="collection-title">풍경에서 오브제까지,<br />일상을 채우는 방법</h2>
           <p>화면 속 풍경을 작품과 선물, 오래 곁에 둘 오브제로 이어갑니다.</p>
         </div>
@@ -110,7 +90,7 @@ export function HomePage() {
           <Image src="/images/home-lifestyle-living.png" alt="햇살 드는 거실에서 CHAEUN 작품과 함께 쉬는 사람" fill sizes="100vw" />
         </div>
         <div className="lifestyle-copy">
-          <span>04 — A BETTER RHYTHM</span>
+          <span>03 — A BETTER RHYTHM</span>
           <h2>좋은 공간은<br />하루의 리듬을 바꿉니다.</h2>
           <p>그림을 바라보는 짧은 순간, 방 안에 흐르는 빛과 바람, 조금 더 편안해진 마음. CHAEUN은 작품보다 그 작품과 함께 살아갈 시간을 먼저 생각합니다.</p>
           <Link className="outline-link" href="/store">공간별 풍경 둘러보기</Link>
@@ -119,7 +99,7 @@ export function HomePage() {
 
       <section className="energy-section" aria-labelledby="energy-title">
         <div className="section-intro">
-          <span>05 — YOUR ENERGY</span>
+          <span>04 — YOUR ENERGY</span>
           <h2 id="energy-title">나에게 필요한 기운이<br />공간에 머무는 방식</h2>
           <p>사주는 사람의 흐름을 읽고, 풍수는 공간의 흐름을 만듭니다. CHAEUN은 둘을 당신의 미감에 맞는 풍경으로 연결합니다.</p>
         </div>

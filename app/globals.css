@@ -116,7 +116,6 @@ a, button { outline-offset: 5px; }
 @keyframes orbit-spin { to { rotate: 360deg; } }
 @keyframes orbit-counter { to { rotate: -360deg; } }
 
-.film-section { min-height: 160vh; padding-top: 10rem; }
 .section-intro { margin: 0 auto; max-width: 760px; padding: 0 2rem 4.5rem; text-align: center; }
 .section-intro h2, .lifestyle-copy h2 {
   margin-top: 1.25rem;
@@ -128,13 +127,7 @@ a, button { outline-offset: 5px; }
   line-height: 1.08;
 }
 .section-intro > p { margin: 1.6rem auto 0; max-width: 560px; color: rgb(37 37 37 / .58); line-height: 1.8; }
-.film-frame { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--color-pine); transform-origin: center; }
-.film-frame video { width: 100%; height: 100%; object-fit: cover; }
-.film-overlay { position: absolute; inset: auto 0 0; display: flex; align-items: end; justify-content: space-between; padding: clamp(2rem, 5vw, 5rem); color: var(--color-paper); background: linear-gradient(transparent, rgb(20 33 29 / .72)); }
-.film-overlay p { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 4.4rem); line-height: 1.05; }
-.film-overlay a { border-bottom: 1px solid rgb(246 244 238 / .5); padding-bottom: .55rem; font-size: .8rem; }
-
-.collection-section { padding: 11rem 0 9rem; }
+.collection-section { padding: 12rem 0 9rem; }
 .collection-track { display: flex; gap: 1.5rem; overflow-x: auto; padding: 0 max(1.5rem, calc((100vw - 1280px) / 2)); scroll-snap-type: x mandatory; }
 .collection-card { flex: 0 0 min(42vw, 580px); scroll-snap-align: center; }
 .collection-image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--color-mist); }
@@ -182,10 +175,6 @@ a, button { outline-offset: 5px; }
   .orbit-field { width: 132vw; }
   .orbit-item svg { width: 1.5rem; }
   .orbit-item span { display: none; }
-  .film-section { min-height: 135vh; padding-top: 7rem; }
-  .film-frame { height: 82svh; }
-  .film-overlay { display: block; padding: 2rem 1.5rem; }
-  .film-overlay p { margin-bottom: 1.4rem; }
   .collection-section { padding: 8rem 0 7rem; }
   .collection-card { flex-basis: 78vw; }
   .lifestyle-section { display: block; }
@@ -207,7 +196,6 @@ a, button { outline-offset: 5px; }
 
 @media (prefers-reduced-motion: reduce) {
   .orbit-field, .orbit-item { animation: none; }
-  .film-frame { transform: none !important; }
 }
 
 * {
