@@ -302,10 +302,10 @@ export const ADDON_OPTIONS: { id: AddonId; label: string; sub: string }[] = [
 
 export type ResultTier = "free" | "digital" | "physical";
 
-export const RESULT_TIERS: { id: ResultTier; label: string; sub: string }[] = [
-  { id: "free", label: "저화질 무료 소장", sub: "SNS 공유용, 워터마크 포함" },
-  { id: "digital", label: "고화질 디지털 소장", sub: "인화 가능한 원본 파일" },
-  { id: "physical", label: "실물로 만들기", sub: "액자·캔버스·굿즈 제작" },
+export const RESULT_TIERS: { id: ResultTier; label: string; sub: string; price: string }[] = [
+  { id: "free", label: "저화질 무료 소장", sub: "SNS 공유용, 워터마크 포함", price: "무료" },
+  { id: "digital", label: "고화질 디지털 소장", sub: "인화 가능한 원본 파일 · 개인 소장 및 인화 가능", price: "12,900원" },
+  { id: "physical", label: "실물로 만들기", sub: "액자·캔버스·굿즈 제작", price: "39,000원부터" },
 ];
 
 export interface ProductFeature {
@@ -342,6 +342,66 @@ export interface Product {
 }
 
 export const PRODUCTS: Product[] = [
+  {
+    id: "oak-slim-frame",
+    slug: "oak-slim-frame",
+    name: "오크 슬림 액자",
+    location: "국내 원목 프레임 제작",
+    price: 49000,
+    unit: "개",
+    tagline: "얇은 오크 결로 작품에 집중하게 하는 액자",
+    description: "밝은 오크 원목을 얇고 단정하게 다듬은 액자예요. 어떤 풍경에도 자연스럽게 어울려 처음 작품을 들이는 공간에 잘 맞아요.",
+    intro: [
+      "밝고 고른 오크 결을 살린 가장 기본적인 채운의 원목 액자예요. 그림의 색과 여백이 먼저 보이도록 프레임 폭을 최소화했어요.",
+      "침실의 작은 벽이나 책상 위, 현관 선반처럼 가벼운 시작이 필요한 공간에 추천해요.",
+    ],
+    accent: "var(--color-oheng-earth)",
+    hasSizeOption: true,
+    features: [
+      { title: "가볍고 단정한 오크", body: "밝은 오크의 결을 얇게 남겨 작품의 여백을 해치지 않아요.", accents: ["var(--color-oheng-earth)", "var(--color-cream)", "var(--color-celadon)"] },
+      { title: "작은 공간에 맞는 깊이", body: "프레임 깊이를 줄여 선반과 좁은 벽에도 부담 없이 놓을 수 있어요.", accents: ["var(--color-oheng-metal)", "var(--color-cream)", "var(--color-terracotta)"] },
+    ],
+    info: [
+      { label: "소재", value: "오크 원목" },
+      { label: "마감", value: "무광 보호 코팅" },
+      { label: "제작 기간", value: "주문 후 4~6일" },
+      { label: "배송", value: "국내 무료배송" },
+    ],
+    guides: [
+      { title: "제작 안내", body: "원목의 결·색은 제품마다 조금씩 다를 수 있어요." },
+      { title: "교환·환불", body: "제작 전에는 전액 환불이 가능하며 제작 후에는 단순 변심 환불이 어려워요." },
+    ],
+  },
+  {
+    id: "aluminum-frame",
+    slug: "aluminum-frame",
+    name: "무광 알루미늄 액자",
+    location: "국내 금속 프레임 제작",
+    price: 59000,
+    unit: "개",
+    tagline: "현대적인 공간을 위한 차분한 무광 프레임",
+    description: "빛 반사를 줄인 차콜 무광 알루미늄 프레임이에요. 모던한 가구와 만났을 때 풍경의 색을 또렷하게 잡아줘요.",
+    intro: [
+      "차콜 계열의 무광 알루미늄을 사용해, 풍경이 가진 색과 질감을 선명하게 보여주는 액자예요.",
+      "콘크리트·스틸·모노톤 가구가 있는 서재와 거실에 특히 잘 어울려요.",
+    ],
+    accent: "var(--color-oheng-metal)",
+    hasSizeOption: true,
+    features: [
+      { title: "빛을 누르는 무광 표면", body: "광택을 줄여 강한 햇빛이 들어오는 벽에서도 작품에 집중할 수 있어요.", accents: ["var(--color-oheng-metal)", "var(--color-ink)", "var(--color-cream)"] },
+      { title: "얇지만 단단한 구조", body: "가벼운 금속 프레임 구조로 큰 작품도 안정감 있게 걸 수 있어요.", accents: ["var(--color-celadon)", "var(--color-oheng-metal)", "var(--color-ink)"] },
+    ],
+    info: [
+      { label: "소재", value: "무광 알루미늄" },
+      { label: "색상", value: "차콜 블랙" },
+      { label: "제작 기간", value: "주문 후 4~6일" },
+      { label: "배송", value: "국내 무료배송" },
+    ],
+    guides: [
+      { title: "제작 안내", body: "금속 표면의 미세한 결은 무광 마감 특성으로 자연스럽게 남을 수 있어요." },
+      { title: "교환·환불", body: "제작 전에는 전액 환불이 가능하며 제작 후에는 단순 변심 환불이 어려워요." },
+    ],
+  },
   {
     id: "hinoki-frame",
     slug: "hinoki-frame",

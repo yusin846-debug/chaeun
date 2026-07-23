@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { ResultTier } from "@/lib/content";
-import { HalftoneBackground } from "./HalftoneBackground";
 
 interface RevealImageProps {
   accent: string;
@@ -47,9 +47,16 @@ export function RevealImage({ accent, revealed, onReveal, tier = null }: RevealI
             scale: revealed ? 1 : 1.12,
           }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0"
+          className="absolute inset-0 bg-paper"
         >
-          <HalftoneBackground accent={accent} />
+          <Image
+            src="/images/chaeun-hero-landscape.png"
+            alt=""
+            fill
+            sizes="(max-width: 640px) 80vw, 320px"
+            className="object-cover object-[74%_center]"
+          />
+          <div className="absolute inset-0 mix-blend-multiply" style={{ backgroundColor: accent, opacity: 0.1 }} />
         </motion.div>
 
         <div

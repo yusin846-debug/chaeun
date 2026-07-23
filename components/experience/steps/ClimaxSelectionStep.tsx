@@ -60,7 +60,10 @@ export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
                             <p className={`text-sm font-semibold ${active ? "text-pine" : "text-ink"}`}>{tier.label}</p>
                             <p className="mt-0.5 text-xs text-ink/50">{tier.sub}</p>
                           </div>
-                          <span className={active ? "text-pine" : "text-ink/30"}>{active ? "✓" : "→"}</span>
+                          <div className="ml-3 flex shrink-0 flex-col items-end gap-1">
+                            <span className={`text-xs font-semibold ${active ? "text-pine" : "text-ink/65"}`}>{tier.price}</span>
+                            <span className={active ? "text-pine" : "text-ink/30"}>{active ? "✓" : "→"}</span>
+                          </div>
                         </Card>
                       </motion.button>
                     );

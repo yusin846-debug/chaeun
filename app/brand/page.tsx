@@ -1,11 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { HalftoneBackground } from "@/components/ui/HalftoneBackground";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { OhaengWheel } from "@/components/ui/OhaengWheel";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { Card } from "@/components/ui/Card";
-import { LandscapeArtwork } from "@/components/ui/LandscapeArtwork";
 
 export const metadata: Metadata = {
   title: "브랜드 이야기 — 채운",
@@ -29,8 +29,8 @@ export default function BrandPage() {
             </p>
             <div className="mt-9"><BrandMark /></div>
           </div>
-          <div className="gallery-shadow mx-auto w-full max-w-[510px] rounded-[2rem] border border-mist/80 bg-paper p-3 sm:p-5">
-            <LandscapeArtwork className="aspect-[4/5] w-full rounded-[1.4rem]" />
+          <div className="gallery-shadow mx-auto w-full max-w-[510px] overflow-hidden rounded-[2rem] border border-mist/80 bg-paper p-3 sm:p-5">
+            <Image src="/images/chaeun-hero-landscape.png" alt="소나무와 안개가 깃든 채운의 풍경 작품" width={1536} height={1024} className="aspect-[4/5] w-full rounded-[1.4rem] object-cover object-[72%_center]" />
           </div>
         </div>
       </section>

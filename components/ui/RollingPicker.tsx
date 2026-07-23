@@ -55,10 +55,28 @@ export function RollingPicker({
     }, 120);
   }, [values, onChange]);
 
+  const moveBy = (delta: number) => {
+    const nextIndex = Math.min(values.length - 1, Math.max(0, activeIndex + delta));
+    const nextValue = values[nextIndex];
+    const el = containerRef.current;
+    el?.scrollTo({ top: nextIndex * ITEM_HEIGHT, behavior: "smooth" });
+    setActiveIndex(nextIndex);
+    onChange(nextValue);
+  };
+
   return (
     <div className="flex flex-col items-center gap-2">
       <span className="text-xs font-medium text-ink/50">{label}</span>
       <div className="relative">
+        <button
+          type="button"
+          onClick={() => moveBy(-1)}
+          disabled={activeIndex === 0}
+          aria-label={`${label} 이전 값`}
+          className="absolute left-1/2 top-1 z-10 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full bg-paper/95 text-xs text-pine shadow-sm transition-opacity disabled:opacity-25"
+        >
+          ▲
+        </button>
         <div
           ref={containerRef}
           onScroll={handleScroll}
@@ -95,6 +113,15 @@ export function RollingPicker({
           className="pointer-events-none absolute inset-x-0 border-y border-celadon/40"
           style={{ top: ITEM_HEIGHT * PADDING_ITEMS, height: ITEM_HEIGHT }}
         />
+        <button
+          type="button"
+          onClick={() => moveBy(1)}
+          disabled={activeIndex === values.length - 1}
+          aria-label={`${label} 다음 값`}
+          className="absolute bottom-1 left-1/2 z-10 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full bg-paper/95 text-xs text-pine shadow-sm transition-opacity disabled:opacity-25"
+        >
+          ▼
+        </button>
       </div>
     </div>
   );

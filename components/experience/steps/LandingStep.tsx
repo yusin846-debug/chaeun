@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { HalftoneBackground } from "@/components/ui/HalftoneBackground";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
-import { LandscapeArtwork } from "@/components/ui/LandscapeArtwork";
 
 interface LandingStepProps {
   onStart: () => void;
@@ -44,27 +44,19 @@ export function LandingStep({ onStart }: LandingStepProps) {
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="gallery-shadow relative mx-auto w-full max-w-[560px] overflow-hidden rounded-[2rem] border border-mist/80 bg-paper p-3 sm:p-5"
+            className="gallery-shadow relative mx-auto w-full max-w-[680px] overflow-hidden rounded-[2rem] border border-mist/80 bg-paper p-3 sm:p-5"
           >
-            <LandscapeArtwork className="aspect-[4/5] w-full rounded-[1.4rem]" />
+            <Image src="/images/chaeun-hero-landscape.png" alt="소나무와 폭포가 어우러진 채운의 풍경 작품" width={1536} height={1024} priority className="aspect-[4/5] w-full rounded-[1.4rem] object-cover object-[72%_center]" />
             <div className="absolute bottom-8 left-8 rounded-full border border-paper/80 bg-paper/90 px-4 py-2 text-[0.68rem] font-medium tracking-[0.12em] text-pine backdrop-blur">THE FLOW OF WATER · 01</div>
           </motion.div>
         </div>
       </section>
 
       <section id="collection" className="relative flex min-h-[70svh] flex-col items-center justify-center gap-6 px-6 text-center">
-        <ScrollReveal className="max-w-md">
-          <p className="font-heading text-2xl font-semibold leading-relaxed text-ink">
-            누구나 다른 사주를 갖고 태어나지만,
-            <br />
-            걸어놓은 그림은 다 똑같다.
-          </p>
-        </ScrollReveal>
-        <ScrollReveal className="max-w-sm">
-          <p className="text-sm leading-relaxed text-ink/55">
-            해바라기, 돈나무 그림은 누구의 방에나 걸려있어요. 정작 이 방에, 지금 당신에게
-            필요한 기운이 무엇인지는 아무도 물어보지 않았죠.
-          </p>
+        <ScrollReveal className="max-w-2xl">
+          <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-pine">WHY A PERSONAL LANDSCAPE</p>
+          <h2 className="mt-5 font-heading text-2xl font-semibold leading-[1.45] text-ink sm:text-3xl">사주에서 찾은 흐름을,<br />풍수의 언어로 공간에 놓습니다.</h2>
+          <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-ink/60">나에게 부족한 기운과 공간의 쓰임, 그리고 좋아하는 풍경의 결을 함께 살펴 한 점의 작품으로 완성합니다.</p>
         </ScrollReveal>
       </section>
 
