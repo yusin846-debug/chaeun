@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface BrandMarkProps {
   compact?: boolean;
@@ -17,14 +18,16 @@ export function BrandSeal({ className = "" }: { className?: string }) {
 }
 
 export function BrandMark({ compact = false, light = false }: BrandMarkProps) {
-  const tone = light ? "text-paper" : "text-pine";
   return (
-    <Link href="/" aria-label="CHAEUN 홈" className={`group inline-flex ${compact ? "flex-row gap-2.5" : "flex-col gap-1.5"} items-center`}>
-      <BrandSeal className={`${compact ? "h-9 w-9" : "h-14 w-14"} transition-transform duration-300 group-hover:rotate-6 ${tone}`} />
-      <span className={`flex flex-col ${compact ? "items-start" : "items-center"} leading-none`}>
-        <span className={`font-logo ${compact ? "text-[1.35rem]" : "text-[1.65rem]"} font-semibold tracking-[0.12em] ${tone}`}>CHAEUN</span>
-        {!compact && <span className={`mt-1.5 font-logo text-[0.72rem] tracking-[0.01em] ${light ? "text-paper/70" : "text-ink/70"}`}>Fill Your Space.</span>}
-      </span>
+    <Link href="/" aria-label="CHAEUN 홈" className="group inline-flex items-center">
+      <Image
+        src="/images/chaeun-logo-official.png"
+        alt="CHAEUN — Fill Your Space."
+        width={159}
+        height={189}
+        priority={compact}
+        className={`${compact ? "h-[74px] w-auto sm:h-[82px]" : "h-[150px] w-auto"} object-contain transition-transform duration-300 group-hover:scale-[1.02] ${light ? "brightness-105" : ""}`}
+      />
     </Link>
   );
 }
