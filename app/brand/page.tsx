@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import { HalftoneBackground } from "@/components/ui/HalftoneBackground";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { OhaengWheel } from "@/components/ui/OhaengWheel";
+import { BrandMark } from "@/components/ui/BrandMark";
+import { Card } from "@/components/ui/Card";
+import { LandscapeArtwork } from "@/components/ui/LandscapeArtwork";
 
 export const metadata: Metadata = {
   title: "브랜드 이야기 — 채운",
@@ -12,55 +15,63 @@ export const metadata: Metadata = {
 export default function BrandPage() {
   return (
     <div>
-      <section className="relative flex min-h-svh flex-col items-center justify-center gap-6 overflow-hidden px-6 text-center">
-        <HalftoneBackground />
-        <div className="relative z-10 flex max-w-md flex-col items-center gap-4">
-          <span className="text-xs font-medium tracking-[0.2em] text-celadon">
-            BRAND STORY
-          </span>
-          <h1 className="font-heading text-3xl font-bold leading-snug text-ink">
-            채운, 彩雲
-          </h1>
-          <p className="text-sm leading-relaxed text-ink/60">
-            그림 한 점, 당신의 기운을 채우다
-          </p>
+      <section className="relative isolate overflow-hidden px-6 pb-16 pt-32 sm:px-10 lg:px-16 lg:pb-24">
+        <HalftoneBackground accent="var(--color-celadon)" className="opacity-35" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+          <div className="max-w-lg">
+            <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-pine">BRAND STORY · 01</p>
+            <h1 className="mt-6 font-heading text-4xl font-semibold leading-[1.25] tracking-[-0.04em] text-ink sm:text-5xl">
+              풍경으로,
+              <br />공간의 결을 채우다.
+            </h1>
+            <p className="mt-6 max-w-md text-sm leading-7 text-ink/65 sm:text-base">
+              채운은 개인의 흐름과 공간의 분위기를 한 점의 풍경으로 번역하는 한국적 라이프스타일 브랜드입니다.
+            </p>
+            <div className="mt-9"><BrandMark /></div>
+          </div>
+          <div className="gallery-shadow mx-auto w-full max-w-[510px] rounded-[2rem] border border-mist/80 bg-paper p-3 sm:p-5">
+            <LandscapeArtwork className="aspect-[4/5] w-full rounded-[1.4rem]" />
+          </div>
         </div>
       </section>
 
-      <section className="relative flex min-h-[70svh] flex-col items-center justify-center gap-6 px-6 text-center">
-        <ScrollReveal className="max-w-md">
-          <p className="font-heading text-xl font-semibold leading-relaxed text-ink">
-            &lsquo;채우다&rsquo;와 &lsquo;채운(彩雲)&rsquo;,
-            <br />두 발음을 겹쳐 지은 이름이에요
-          </p>
-        </ScrollReveal>
-        <ScrollReveal className="max-w-sm">
-          <p className="text-sm leading-relaxed text-ink/55">
-            채운(彩雲)은 동양화에서 길조를 상징하는 채색 구름을 뜻해요. 부족한 기운을
-            채운다는 뜻의 &lsquo;채우다&rsquo;와 발음이 겹치죠. 사용자의 사주를 분석해
-            부족한 오행을 찾고, 그 기운을 채우는 풍경을 그려드려요.
-          </p>
-        </ScrollReveal>
+      <section className="px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
+        <div className="mx-auto max-w-6xl">
+          <ScrollReveal className="max-w-xl">
+            <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-pine">THE NAME</p>
+            <h2 className="mt-5 font-heading text-3xl font-semibold leading-[1.4] tracking-[-0.03em] text-ink">
+              &lsquo;채우다&rsquo;와 &lsquo;채운(彩雲)&rsquo;,
+              <br />두 개의 흐름이 만난 이름입니다.
+            </h2>
+          </ScrollReveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {[
+              ["FLOW", "공간과 마음에 자연스럽게 스미는 흐름"],
+              ["NATURE", "소나무, 물, 빛에서 찾은 편안한 균형"],
+              ["PERSONAL", "나와 내 공간을 위한 단 하나의 풍경"],
+            ].map(([label, body]) => (
+              <Card key={label} className="min-h-44 p-7">
+                <p className="text-[0.65rem] font-semibold tracking-[0.18em] text-pine">{label}</p>
+                <p className="mt-7 font-heading text-lg leading-7 text-ink">{body}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="relative flex min-h-[70svh] flex-col items-center justify-center gap-6 px-6 text-center">
-        <ScrollReveal className="max-w-md">
-          <p className="font-heading text-xl font-semibold leading-relaxed text-ink">
-            기존 풍수 인테리어 시장엔
-            <br />
-            빈 자리가 있었어요
-          </p>
-        </ScrollReveal>
-        <ScrollReveal className="max-w-sm">
-          <p className="text-sm leading-relaxed text-ink/55">
-            한쪽엔 해바라기·돈나무 같은 획일화된 저가 템플릿 그림이, 반대쪽엔 가격이
-            비공개인 고가의 1:1 컨설팅이 있었어요. 그 사이, &lsquo;합리적인 가격의
-            맞춤형 상품&rsquo;이라는 공백을 자동화된 개인화 파이프라인으로 채웠어요.
-          </p>
-        </ScrollReveal>
+      <section className="bg-pine px-6 py-20 text-paper sm:px-10 lg:px-16 lg:py-28">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <ScrollReveal>
+            <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-celadon">OUR APPROACH</p>
+            <h2 className="mt-5 font-heading text-3xl font-semibold leading-[1.4] tracking-[-0.03em]">운세를 말하기보다,<br />당신의 공간을 읽습니다.</h2>
+          </ScrollReveal>
+          <ScrollReveal className="max-w-xl">
+            <p className="text-sm leading-7 text-paper/70 sm:text-base">획일적인 행운의 상징 대신, 공간의 용도와 취향, 당신의 흐름을 함께 살핍니다. 그 결과는 설명이 아니라 오래 곁에 둘 수 있는 작품이어야 한다고 믿습니다.</p>
+          </ScrollReveal>
+        </div>
       </section>
 
-      <section className="relative flex min-h-[85svh] flex-col items-center justify-center gap-8 px-6 text-center">
+      <section className="relative flex min-h-[80svh] flex-col items-center justify-center gap-8 px-6 text-center">
         <ScrollReveal className="max-w-md">
           <p className="font-heading text-xl font-semibold leading-relaxed text-ink">
             오행은 서로를 낳고, 서로를 채워요
@@ -76,26 +87,18 @@ export default function BrandPage() {
         </ScrollReveal>
       </section>
 
-      <section className="relative flex min-h-[70svh] flex-col items-center justify-center gap-6 overflow-hidden px-6 text-center">
+      <section className="relative overflow-hidden px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
         <HalftoneBackground accent="var(--color-oheng-wood)" />
-        <ScrollReveal className="relative z-10 max-w-md">
-          <p className="font-heading text-xl font-semibold leading-relaxed text-ink">
-            그림은 AI가, 액자는 국내 장인이
-          </p>
-        </ScrollReveal>
-        <ScrollReveal className="relative z-10 max-w-sm">
-          <p className="text-sm leading-relaxed text-ink/55">
-            이미지는 AI로 빠르게 생성해 합리적인 가격을 만들고, 실물 액자와 굿즈는
-            국내 제작 파트너와 함께 편백나무·캔버스·한지 같은 소재로 정성껏
-            완성해요.
-          </p>
-        </ScrollReveal>
-        <Link
-          href="/"
-          className="relative z-10 rounded-full bg-celadon px-6 py-3 text-sm font-medium text-cream shadow-sm transition-transform hover:scale-[1.02]"
-        >
-          내 기운 채우러 가기
-        </Link>
+        <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
+          <ScrollReveal>
+            <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-pine">FROM IMAGE TO OBJECT</p>
+            <h2 className="mt-5 font-heading text-3xl font-semibold leading-[1.4] tracking-[-0.03em] text-ink">디지털 풍경은 작품이 되고,<br />국내 제작으로 공간에 머뭅니다.</h2>
+          </ScrollReveal>
+          <ScrollReveal className="mt-6 max-w-xl">
+            <p className="text-sm leading-7 text-ink/60">AI는 개인화된 이미지를 만드는 도구일 뿐입니다. 실물 작품은 편백나무·캔버스·한지처럼 시간이 지날수록 좋아지는 소재와 국내 제작 파트너의 손길로 완성합니다.</p>
+          </ScrollReveal>
+          <Link href="/" className="mt-9 rounded-full bg-pine px-7 py-4 text-sm font-medium text-paper transition-transform duration-200 hover:scale-[1.02]">내 풍경 만들기</Link>
+        </div>
       </section>
     </div>
   );
