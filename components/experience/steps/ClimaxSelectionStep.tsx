@@ -14,6 +14,7 @@ interface ClimaxSelectionStepProps {
 
 export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
   const [selectedTier, setSelectedTier] = useState<ResultTier | null>(null);
+  const [showKeepOptions, setShowKeepOptions] = useState(false);
   const resultRevealed = useExperienceStore((s) => s.resultRevealed);
   const revealResult = useExperienceStore((s) => s.revealResult);
   const missingOhaeng = useExperienceStore((s) => s.missingOhaeng);
@@ -24,7 +25,7 @@ export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(300px,0.9fr)_minmax(360px,1fr)] lg:items-center lg:gap-20">
         <div className="order-2 flex flex-col items-center lg:order-1">
           <div className="mb-4 w-full max-w-xs text-left text-[0.65rem] font-semibold tracking-[0.18em] text-pine">CHAEUN PERSONAL LANDSCAPE · 01</div>
-          <RevealImage accent={ohaeng.color} revealed={resultRevealed} onReveal={revealResult} tier={selectedTier} />
+          <RevealImage accent={ohaeng.color} imageSrc={`/images/ohaeng-${ohaeng.id}.png`} revealed={resultRevealed} onReveal={revealResult} tier={selectedTier} />
           {!resultRevealed && <p className="mt-4 text-xs text-ink/45">안개가 걷히면, 당신의 풍경이 드러납니다.</p>}
         </div>
 
@@ -48,7 +49,13 @@ export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
                 <p className="text-sm leading-6 text-ink/70">{ohaeng.mood}</p>
               </Card>
 
-              <div className="mt-4">
+              <div className="mt-5 rounded-3xl border border-mist bg-paper p-5">
+                <p className="font-heading text-lg font-semibold text-ink">이 풍경을 매일 마주하고 싶다면</p>
+                <p className="mt-2 text-sm leading-6 text-ink/60">당신의 공간에 맞는 크기와 소재로, 이 풍경이 오래 편안하게 머물 수 있는 방법을 함께 골라보세요.</p>
+                {!showKeepOptions && <PrimaryButton variant="ghost" className="mt-5 min-h-11 px-5 py-2" onClick={() => setShowKeepOptions(true)}>소장 방식 살펴보기</PrimaryButton>}
+              </div>
+
+              {showKeepOptions && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-1">
                 <p className="text-[0.68rem] font-semibold tracking-[0.16em] text-ink/45">HOW WOULD YOU LIKE TO KEEP IT?</p>
                 <div className="mt-3 flex flex-col gap-2">
                   {RESULT_TIERS.map((tier) => {
@@ -69,7 +76,7 @@ export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
                     );
                   })}
                 </div>
-              </div>
+              </motion.div>}
 
               {selectedTier && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="pt-2"><PrimaryButton className="w-full" onClick={() => onSelect(selectedTier)}>이 작품을 공간에 들이기</PrimaryButton></motion.div>}
             </motion.div>

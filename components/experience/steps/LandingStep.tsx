@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { HalftoneBackground } from "@/components/ui/HalftoneBackground";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { NatureIcon } from "@/components/ui/NatureIcons";
 
 interface LandingStepProps {
   onStart: () => void;
@@ -46,7 +47,7 @@ export function LandingStep({ onStart }: LandingStepProps) {
             transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="gallery-shadow relative mx-auto w-full max-w-[680px] overflow-hidden rounded-[2rem] border border-mist/80 bg-paper p-3 sm:p-5"
           >
-            <Image src="/images/chaeun-hero-landscape.png" alt="소나무와 폭포가 어우러진 채운의 풍경 작품" width={1536} height={1024} priority className="aspect-[4/5] w-full rounded-[1.4rem] object-cover object-[72%_center]" />
+            <Image src="/images/chaeun-hero-landscape.png" alt="소나무와 폭포가 어우러진 채운의 풍경 작품" width={1536} height={1024} priority className="aspect-[3/2] w-full rounded-[1.4rem] object-cover" />
             <div className="absolute bottom-8 left-8 rounded-full border border-paper/80 bg-paper/90 px-4 py-2 text-[0.68rem] font-medium tracking-[0.12em] text-pine backdrop-blur">THE FLOW OF WATER · 01</div>
           </motion.div>
         </div>
@@ -58,6 +59,22 @@ export function LandingStep({ onStart }: LandingStepProps) {
           <h2 className="mt-5 font-heading text-2xl font-semibold leading-[1.45] text-ink sm:text-3xl">사주에서 찾은 흐름을,<br />풍수의 언어로 공간에 놓습니다.</h2>
           <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-ink/60">나에게 부족한 기운과 공간의 쓰임, 그리고 좋아하는 풍경의 결을 함께 살펴 한 점의 작품으로 완성합니다.</p>
         </ScrollReveal>
+      </section>
+
+      <section className="px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
+        <div className="mx-auto grid max-w-6xl gap-3 md:grid-cols-3">
+          {[
+            ["sun", "사주 흐름", "태어난 순간의 기운을 차분히 읽습니다."],
+            ["waterfall", "공간의 방향", "머무는 공간에 어울리는 배치를 제안합니다."],
+            ["pine", "나만의 풍경", "좋아하는 결을 담아 작품으로 완성합니다."],
+          ].map(([icon, title, body]) => (
+            <div key={title} className="rounded-3xl border border-mist bg-paper p-7 text-left">
+              <NatureIcon name={icon as "sun" | "waterfall" | "pine"} className="h-8 w-8 text-pine" />
+              <h3 className="mt-8 font-heading text-xl font-semibold text-ink">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-ink/60">{body}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="relative flex min-h-[70svh] flex-col items-center justify-center gap-5 px-6 text-center">

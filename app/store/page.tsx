@@ -13,10 +13,10 @@ export default function StorePage() {
   const productImage: Record<string, string> = {
     "wallpaper-set": "/images/chaeun-style-collection.png",
     "hanji-print": "/images/chaeun-hero-landscape.png",
-    diffuser: "/images/chaeun-showroom.png",
-    "hinoki-frame": "/images/chaeun-showroom.png",
-    "oak-slim-frame": "/images/chaeun-showroom.png",
-    "aluminum-frame": "/images/chaeun-showroom.png",
+    diffuser: "/images/chaeun-objects-collection.png",
+    "hinoki-frame": "/images/chaeun-objects-collection.png",
+    "oak-slim-frame": "/images/chaeun-objects-collection.png",
+    "aluminum-frame": "/images/chaeun-objects-collection.png",
   };
 
   return (
@@ -44,7 +44,7 @@ export default function StorePage() {
               href={`/store/${product.slug}`}
               className="group overflow-hidden rounded-3xl border border-mist bg-paper shadow-sm transition-[transform,box-shadow] hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[3/2] overflow-hidden bg-paper">
                 <Image src={productImage[product.id]} alt="" fill className={`object-cover transition-transform duration-500 group-hover:scale-105 ${product.id === "hanji-print" ? "object-[70%_center]" : product.id === "wallpaper-set" ? "object-[100%_100%]" : "object-center"}`} />
               </div>
               <div className="p-5">

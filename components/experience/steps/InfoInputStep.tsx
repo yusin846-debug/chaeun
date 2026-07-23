@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { RollingPicker } from "@/components/ui/RollingPicker";
 import { TasteRoundCard } from "@/components/ui/SwipeCard";
@@ -34,6 +35,13 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
     }
   };
 
+  const spaceImage: Record<string, string> = {
+    living: "/images/chaeun-showroom.png",
+    bedroom: "/images/space-bedroom.png",
+    entrance: "/images/chaeun-objects-collection.png",
+    study: "/images/space-study.png",
+  };
+
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-8 px-6 py-16">
       <AnimatePresence mode="wait">
@@ -60,11 +68,15 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
                     type="button"
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setSpace(item.id)}
-                    className={`paper-surface flex min-h-36 flex-col items-start rounded-3xl border p-5 text-left transition-colors ${active ? "border-pine bg-pine/5 text-pine" : "border-mist text-ink hover:border-pine/45"}`}
+                    className={`relative flex min-h-44 flex-col items-start justify-end overflow-hidden rounded-3xl border p-5 text-left transition-colors ${active ? "border-pine text-pine" : "border-mist text-ink hover:border-pine/45"}`}
                   >
-                    <SpaceIcon id={item.id} className="h-6 w-6 stroke-[1.5]" />
-                    <span className="mt-6 text-base font-semibold">{item.label}</span>
-                    <span className="mt-1 text-xs leading-5 text-ink/50">{item.intro}</span>
+                    <Image src={spaceImage[item.id]} alt="" fill className="object-cover" />
+                    <div className="absolute inset-0 bg-paper/65" />
+                    <div className="relative">
+                      <SpaceIcon id={item.id} className="h-6 w-6 stroke-[1.5]" />
+                      <span className="mt-5 block text-base font-semibold">{item.label}</span>
+                      <span className="mt-1 block text-xs leading-5 text-ink/65">{item.intro}</span>
+                    </div>
                   </motion.button>
                 );
               })}

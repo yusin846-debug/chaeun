@@ -30,7 +30,7 @@ export default function BrandPage() {
             <div className="mt-9"><BrandMark /></div>
           </div>
           <div className="gallery-shadow mx-auto w-full max-w-[510px] overflow-hidden rounded-[2rem] border border-mist/80 bg-paper p-3 sm:p-5">
-            <Image src="/images/chaeun-hero-landscape.png" alt="소나무와 안개가 깃든 채운의 풍경 작품" width={1536} height={1024} className="aspect-[4/5] w-full rounded-[1.4rem] object-cover object-[72%_center]" />
+            <Image src="/images/chaeun-hero-landscape.png" alt="소나무와 안개가 깃든 채운의 풍경 작품" width={1536} height={1024} className="aspect-[3/2] w-full rounded-[1.4rem] object-cover" />
           </div>
         </div>
       </section>
@@ -59,14 +59,14 @@ export default function BrandPage() {
         </div>
       </section>
 
-      <section className="bg-pine px-6 py-20 text-paper sm:px-10 lg:px-16 lg:py-28">
+      <section className="border-y border-mist bg-paper px-6 py-20 text-ink sm:px-10 lg:px-16 lg:py-28">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <ScrollReveal>
-            <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-celadon">OUR APPROACH</p>
+            <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-pine">OUR APPROACH</p>
             <h2 className="mt-5 font-heading text-3xl font-semibold leading-[1.4] tracking-[-0.03em]">운세를 말하기보다,<br />당신의 공간을 읽습니다.</h2>
           </ScrollReveal>
           <ScrollReveal className="max-w-xl">
-            <p className="text-sm leading-7 text-paper/70 sm:text-base">획일적인 행운의 상징 대신, 공간의 용도와 취향, 당신의 흐름을 함께 살핍니다. 그 결과는 설명이 아니라 오래 곁에 둘 수 있는 작품이어야 한다고 믿습니다.</p>
+            <p className="text-sm leading-7 text-ink/65 sm:text-base">획일적인 행운의 상징 대신, 공간의 용도와 취향, 당신의 흐름을 함께 살핍니다. 그 결과는 설명이 아니라 오래 곁에 둘 수 있는 작품이어야 한다고 믿습니다.</p>
           </ScrollReveal>
         </div>
       </section>

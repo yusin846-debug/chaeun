@@ -3,15 +3,17 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { ResultTier } from "@/lib/content";
+import { BrandSeal } from "./BrandMark";
 
 interface RevealImageProps {
   accent: string;
   revealed: boolean;
   onReveal: () => void;
   tier?: ResultTier | null;
+  imageSrc?: string;
 }
 
-export function RevealImage({ accent, revealed, onReveal, tier = null }: RevealImageProps) {
+export function RevealImage({ accent, revealed, onReveal, tier = null, imageSrc = "/images/chaeun-hero-landscape.png" }: RevealImageProps) {
   const isPhysical = revealed && tier === "physical";
   const watermarkOpacity = !revealed ? 0.28 : tier === "digital" ? 0 : tier === "physical" ? 0 : 0.22;
 
@@ -50,11 +52,11 @@ export function RevealImage({ accent, revealed, onReveal, tier = null }: RevealI
           className="absolute inset-0 bg-paper"
         >
           <Image
-            src="/images/chaeun-hero-landscape.png"
+            src={imageSrc}
             alt=""
             fill
             sizes="(max-width: 640px) 80vw, 320px"
-            className="object-cover object-[74%_center]"
+            className="object-cover"
           />
           <div className="absolute inset-0 mix-blend-multiply" style={{ backgroundColor: accent, opacity: 0.1 }} />
         </motion.div>
@@ -63,8 +65,10 @@ export function RevealImage({ accent, revealed, onReveal, tier = null }: RevealI
           className="pointer-events-none absolute inset-0 flex select-none items-center justify-center overflow-hidden transition-opacity duration-500"
           style={{ opacity: watermarkOpacity }}
         >
-          <div className="rotate-[-28deg] whitespace-nowrap text-2xl font-semibold tracking-[0.3em] text-ink/70">
-            채운 · 미리보기 · 채운 · 미리보기 · 채운
+          <div className="flex rotate-[-24deg] items-center gap-3 rounded-full border border-ink/15 bg-paper/35 px-5 py-3 text-pine">
+            <BrandSeal className="h-8 w-8" />
+            <span className="font-logo text-xl font-semibold tracking-[0.16em]">CHAEUN</span>
+            <span className="text-[0.6rem] font-medium tracking-[0.14em] text-ink/60">PREVIEW</span>
           </div>
         </div>
 
