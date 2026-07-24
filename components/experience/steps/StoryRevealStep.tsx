@@ -14,6 +14,10 @@ interface StoryRevealStepProps {
 
 const SYNERGY_LINE_INDEX = 4;
 
+function readDuration(text: string) {
+  return Math.min(3400, Math.max(1500, 700 + text.replace(/\n/g, "").length * 55));
+}
+
 export function StoryRevealStep({ onComplete }: StoryRevealStepProps) {
   const [visibleCount, setVisibleCount] = useState(0);
   const goTo = useExperienceStore((s) => s.goTo);
@@ -27,9 +31,9 @@ export function StoryRevealStep({ onComplete }: StoryRevealStepProps) {
       const t = setTimeout(onComplete, 1400);
       return () => clearTimeout(t);
     }
-    const t = setTimeout(() => setVisibleCount((c) => c + 1), 1150);
+    const t = setTimeout(() => setVisibleCount((c) => c + 1), readDuration(lines[visibleCount]));
     return () => clearTimeout(t);
-  }, [visibleCount, lines.length, onComplete]);
+  }, [visibleCount, lines, onComplete]);
 
   return (
     <div className="relative flex min-h-svh flex-col items-center justify-center gap-6 overflow-hidden px-6 py-16 text-center">
