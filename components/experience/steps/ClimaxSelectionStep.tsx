@@ -5,8 +5,10 @@ import { motion } from "motion/react";
 import { RevealImage } from "@/components/ui/RevealImage";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { Card } from "@/components/ui/Card";
+import { BackButton } from "@/components/ui/BackButton";
 import { OHAENG, RESULT_TIERS, ResultTier } from "@/lib/content";
 import { useExperienceStore } from "@/lib/store";
+import { downloadWatermarkedImage } from "@/lib/downloadWatermark";
 
 interface ClimaxSelectionStepProps {
   onSelect: (tier: ResultTier) => void;
@@ -15,13 +17,30 @@ interface ClimaxSelectionStepProps {
 export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
   const [selectedTier, setSelectedTier] = useState<ResultTier | null>(null);
   const [showKeepOptions, setShowKeepOptions] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const resultRevealed = useExperienceStore((s) => s.resultRevealed);
   const revealResult = useExperienceStore((s) => s.revealResult);
   const missingOhaeng = useExperienceStore((s) => s.missingOhaeng);
+  const goTo = useExperienceStore((s) => s.goTo);
   const ohaeng = OHAENG[missingOhaeng()];
 
+  const handleConfirm = async () => {
+    if (!selectedTier) return;
+    if (selectedTier === "free") {
+      setDownloading(true);
+      try {
+        await downloadWatermarkedImage(`/images/ohaeng-${ohaeng.id}.png`, `chaeun-${ohaeng.id}-preview.png`);
+      } finally {
+        setDownloading(false);
+      }
+      return;
+    }
+    onSelect(selectedTier);
+  };
+
   return (
-    <div className="min-h-svh px-6 pb-16 pt-28 sm:px-10 lg:px-16">
+    <div className="relative min-h-svh px-6 pb-16 pt-28 sm:px-10 lg:px-16">
+      <BackButton onClick={() => goTo("story")} />
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(300px,0.9fr)_minmax(360px,1fr)] lg:items-center lg:gap-20">
         <div className="order-2 flex flex-col items-center lg:order-1">
           <div className="mb-4 w-full max-w-xs text-left text-[0.65rem] font-semibold tracking-[0.18em] text-pine">CHAEUN PERSONAL LANDSCAPE · 01</div>
@@ -78,7 +97,17 @@ export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
                 </div>
               </motion.div>}
 
-              {selectedTier && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="pt-2"><PrimaryButton className="w-full" onClick={() => onSelect(selectedTier)}>이 작품을 공간에 들이기</PrimaryButton></motion.div>}
+              {selectedTier && (
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="pt-2">
+                  <PrimaryButton className="w-full" onClick={handleConfirm} disabled={downloading}>
+                    {selectedTier === "free"
+                      ? downloading
+                        ? "저장 중..."
+                        : "무료 이미지 저장하기"
+                      : "이 작품을 공간에 들이기"}
+                  </PrimaryButton>
+                </motion.div>
+              )}
             </motion.div>
           )}
         </div>

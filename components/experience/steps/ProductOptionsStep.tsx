@@ -7,6 +7,7 @@ import { SpaceSelector } from "@/components/ui/SpaceSelector";
 import { FengshuiPanel } from "@/components/ui/FengshuiPanel";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { Card } from "@/components/ui/Card";
+import { BackButton } from "@/components/ui/BackButton";
 import {
   ADDON_OPTIONS,
   AddonId,
@@ -32,13 +33,15 @@ export function ProductOptionsStep() {
   const closePopup = useExperienceStore((s) => s.closePopup);
   const applyRecommendedSize = useExperienceStore((s) => s.applyRecommendedSize);
   const missingOhaeng = useExperienceStore((s) => s.missingOhaeng);
+  const goTo = useExperienceStore((s) => s.goTo);
   const ohaeng = OHAENG[missingOhaeng()];
 
   const selectedSpace = SPACES.find((s) => s.id === product.space);
   const selectedStructure = STRUCTURES.find((s) => s.id === product.structure);
 
   return (
-    <div className="flex min-h-svh flex-col items-center gap-8 px-6 py-16">
+    <div className="relative flex min-h-svh flex-col items-center gap-8 px-6 py-16">
+      <BackButton onClick={() => goTo("climax")} />
       <h2 className="font-heading text-xl font-semibold text-ink">
         마지막으로, 상품을 골라주세요
       </h2>

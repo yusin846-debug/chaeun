@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { RollingPicker } from "@/components/ui/RollingPicker";
 import { TasteRoundCard } from "@/components/ui/SwipeCard";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { BackButton } from "@/components/ui/BackButton";
 import { SpaceIcon } from "@/components/ui/SpaceIcons";
 import { SPACES, TASTE_ROUNDS } from "@/lib/content";
 import { useExperienceStore } from "@/lib/store";
@@ -61,16 +62,7 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
 
   return (
     <div className="relative flex min-h-svh flex-col items-center justify-center gap-8 px-6 py-16">
-      <button
-        type="button"
-        onClick={handleBack}
-        aria-label="이전으로"
-        className="absolute left-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-pine transition-colors hover:bg-pine/10 sm:left-6 sm:top-6"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
+      <BackButton onClick={handleBack} />
       <AnimatePresence mode="wait">
         {phase === "space" ? (
           <motion.div

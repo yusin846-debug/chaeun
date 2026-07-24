@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { HalftoneBackground } from "@/components/ui/HalftoneBackground";
 import { OhaengWheel } from "@/components/ui/OhaengWheel";
+import { BackButton } from "@/components/ui/BackButton";
 import { OHAENG, getStoryLines } from "@/lib/content";
 import { useExperienceStore } from "@/lib/store";
 
@@ -15,6 +16,7 @@ const SYNERGY_LINE_INDEX = 4;
 
 export function StoryRevealStep({ onComplete }: StoryRevealStepProps) {
   const [visibleCount, setVisibleCount] = useState(0);
+  const goTo = useExperienceStore((s) => s.goTo);
   const missingOhaeng = useExperienceStore((s) => s.missingOhaeng);
   const ohaengId = missingOhaeng();
   const ohaeng = OHAENG[ohaengId];
@@ -31,6 +33,7 @@ export function StoryRevealStep({ onComplete }: StoryRevealStepProps) {
 
   return (
     <div className="relative flex min-h-svh flex-col items-center justify-center gap-6 overflow-hidden px-6 py-16 text-center">
+      <BackButton onClick={() => goTo("info")} />
       <HalftoneBackground accent={ohaeng.color} />
 
       <div className="relative z-10">
