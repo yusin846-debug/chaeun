@@ -128,7 +128,7 @@ export default function StorePage() {
               <button
                 key={f.id}
                 onClick={() => setActive(f.id)}
-                className="whitespace-nowrap rounded-full border-[1.5px] px-4.5 py-2.5 text-[13px] font-semibold transition-colors"
+                className="whitespace-nowrap rounded-full border-[1.5px] px-[18px] py-2.5 text-[13px] font-semibold transition-colors"
                 style={
                   isSunflower
                     ? { background: "#E8952E", color: "#5C3A1E", borderColor: "#8a5a2b" }

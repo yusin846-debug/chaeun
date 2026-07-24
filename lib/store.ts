@@ -21,6 +21,9 @@ interface ExperienceState {
   birthInfo: BirthInfo;
   setBirthInfo: (patch: Partial<BirthInfo>) => void;
 
+  gender: "f" | "m" | null;
+  setGender: (gender: "f" | "m") => void;
+
   tasteAnswers: string[];
   tasteRoundIndex: number;
   answerTaste: (optionId: string) => void;
@@ -48,6 +51,9 @@ export const useExperienceStore = create<ExperienceState>((set, get) => ({
   birthInfo: { year: 1996, month: 6, day: 15, hour: 12 },
   setBirthInfo: (patch) =>
     set((state) => ({ birthInfo: { ...state.birthInfo, ...patch } })),
+
+  gender: null,
+  setGender: (gender) => set({ gender }),
 
   tasteAnswers: [],
   tasteRoundIndex: 0,

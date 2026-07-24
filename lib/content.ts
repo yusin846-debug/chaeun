@@ -131,102 +131,96 @@ export function getStoryLines(id: OhaengId): string[] {
   ];
 }
 
-export type TastePattern = "dots" | "grid" | "plain";
+export interface SwipeTasteOption {
+  id: string;
+  label: string;
+  image: string;
+}
 
-export interface TasteOption {
+export interface IconTasteOption {
+  id: OhaengId;
+  hanja: string;
+  material: string;
+}
+
+export interface GalleryTasteOption {
+  id: string;
+  label: string;
+  image: string;
+}
+
+export interface StyleTasteOption {
   id: string;
   label: string;
   sub: string;
-  gradient: string;
-  pattern?: TastePattern;
 }
 
-export interface TasteRound {
-  id: string;
-  prompt: string;
-  options: TasteOption[];
-}
+export type TasteRound =
+  | { id: string; kind: "swipe"; question: string; options: SwipeTasteOption[] }
+  | { id: string; kind: "icons"; question: string; options: IconTasteOption[] }
+  | { id: string; kind: "gallery"; question: string; options: GalleryTasteOption[] }
+  | { id: string; kind: "style"; question: string; options: StyleTasteOption[] };
 
 export const TASTE_ROUNDS: TasteRound[] = [
   {
-    id: "brush",
-    prompt: "어떤 화풍이 더 끌리나요?",
-    options: [
-      {
-        id: "dotted",
-        label: "점묘화",
-        sub: "무수한 점이 쌓여 만드는 결",
-        gradient:
-          "radial-gradient(circle at 30% 30%, var(--color-celadon) 0%, transparent 45%), radial-gradient(circle at 70% 70%, var(--color-oheng-wood) 0%, transparent 50%), var(--color-cream)",
-        pattern: "dots",
-      },
-      {
-        id: "ink",
-        label: "수묵화",
-        sub: "먹의 농담이 번지는 여백",
-        gradient:
-          "linear-gradient(160deg, var(--color-ink) 0%, transparent 60%), var(--color-cream)",
-        pattern: "plain",
-      },
-      {
-        id: "modern",
-        label: "모던패턴",
-        sub: "기하학적 선의 정갈한 리듬",
-        gradient:
-          "linear-gradient(135deg, var(--color-celadon) 0%, var(--color-oheng-metal) 100%)",
-        pattern: "grid",
-      },
-      {
-        id: "oil",
-        label: "유화",
-        sub: "두텁게 쌓아올린 붓의 질감",
-        gradient:
-          "radial-gradient(circle at 25% 20%, var(--color-oheng-fire) 0%, transparent 55%), radial-gradient(circle at 75% 60%, var(--color-terracotta) 0%, transparent 60%), var(--color-oheng-earth)",
-        pattern: "plain",
-      },
-    ],
-  },
-  {
-    id: "medium",
-    prompt: "더 마음이 가는 표현은요?",
-    options: [
-      {
-        id: "photo",
-        label: "사진화",
-        sub: "실제 풍경처럼 선명하게",
-        gradient:
-          "linear-gradient(135deg, var(--color-oheng-water) 0%, var(--color-celadon) 100%)",
-      },
-      {
-        id: "watercolor",
-        label: "수채화",
-        sub: "물기를 머금은 부드러운 번짐",
-        gradient:
-          "linear-gradient(135deg, var(--color-oheng-earth) 0%, var(--color-terracotta) 100%)",
-      },
-    ],
-  },
-  {
     id: "tone",
-    prompt: "공간에 어떤 온도를 더하고 싶나요?",
+    kind: "swipe",
+    question: "어떤 색의 결이 더 편안한가요?",
     options: [
-      {
-        id: "warm",
-        label: "따뜻한 톤",
-        sub: "해질녘처럼 은은하게",
-        gradient:
-          "linear-gradient(135deg, var(--color-oheng-fire) 0%, var(--color-oheng-earth) 100%)",
-      },
-      {
-        id: "cool",
-        label: "차분한 톤",
-        sub: "새벽 공기처럼 맑게",
-        gradient:
-          "linear-gradient(135deg, var(--color-oheng-water) 0%, var(--color-oheng-metal) 100%)",
-      },
+      { id: "warm", label: "따뜻한 온기", image: "/images/name-personal-bg.png" },
+      { id: "cool", label: "맑고 서늘한 결", image: "/images/name-flow-bg.png" },
+    ],
+  },
+  {
+    id: "material",
+    kind: "icons",
+    question: "평소에 어떤 소재가\n마음에 들어오시나요?",
+    options: [
+      { id: "wood", hanja: "목(木)", material: "목재" },
+      { id: "fire", hanja: "화(火)", material: "따뜻한 조명" },
+      { id: "earth", hanja: "토(土)", material: "푸근한 벽돌" },
+      { id: "metal", hanja: "금(金)", material: "매끈한 금속" },
+      { id: "water", hanja: "수(水)", material: "유연한 소재" },
+    ],
+  },
+  {
+    id: "scene",
+    kind: "gallery",
+    question: "평생 잊지 못할 순간,\n마음에 새겨진 장면이 있다면?",
+    options: [
+      { id: "sunflower_field", label: "끝없는 해바라기 밭", image: "/images/sunflower-field-girl.png" },
+      { id: "forest_lake", label: "숲 사이로 비친 호수", image: "/images/poster-forest-lake.png" },
+      { id: "quiet_room", label: "낯선 곳의 고요한 방", image: "/images/space-bedroom.png" },
+      { id: "cloud_hill", label: "들꽃 언덕 위의 구름", image: "/images/poster-cloud-field.png" },
+    ],
+  },
+  {
+    id: "style",
+    kind: "style",
+    question: "지금, 당신의 마음에\n확 들어오는 화풍은?",
+    options: [
+      { id: "pattern", label: "패턴", sub: "바우하우스풍 추상 형태" },
+      { id: "watercolor", label: "수채화", sub: "맑고 투명한 번짐" },
+      { id: "photo", label: "사진", sub: "풍경 또는 오브제" },
+      { id: "oil", label: "유화", sub: "두터운 붓의 질감" },
+      { id: "ink", label: "수묵화", sub: "먹의 농담과 여백" },
+      { id: "oriental", label: "동양화", sub: "전통 화조·산수" },
+      { id: "pointillism", label: "점묘화", sub: "무수한 점의 조화" },
+      { id: "impressionism", label: "인상파", sub: "빛과 색의 순간" },
     ],
   },
 ];
+
+export const STYLE_SWATCH: Record<string, string> = {
+  pattern: "conic-gradient(from 45deg at 30% 35%, var(--color-terracotta) 0deg 90deg, var(--color-gold) 90deg 180deg, var(--color-pine) 180deg 270deg, var(--color-celadon) 270deg 360deg)",
+  watercolor: "radial-gradient(circle at 28% 26%, var(--color-celadon) 0%, transparent 55%), radial-gradient(circle at 68% 62%, var(--color-terracotta) 0%, transparent 55%), radial-gradient(circle at 50% 90%, var(--color-gold) 0%, transparent 60%), var(--color-paper)",
+  photo: "linear-gradient(155deg, #8fa89e 0%, #354a44 100%)",
+  oil: "repeating-linear-gradient(118deg, var(--color-terracotta) 0 10px, var(--color-gold) 10px 20px, var(--color-pine) 20px 30px, var(--color-celadon) 30px 40px)",
+  ink: "radial-gradient(ellipse at 35% 20%, rgba(49,88,72,.55) 0%, transparent 45%), radial-gradient(ellipse at 60% 55%, rgba(49,88,72,.3) 0%, transparent 50%), linear-gradient(180deg, #f2efe4, #e6ddc8)",
+  oriental: "radial-gradient(circle at 75% 25%, var(--color-terracotta) 0 5%, transparent 6%), linear-gradient(200deg, #e7dcc2 0%, #cfc09a 100%)",
+  pointillism: "radial-gradient(var(--color-terracotta) 1.6px, transparent 1.7px) 0 0/12px 12px, radial-gradient(var(--color-pine) 1.6px, transparent 1.7px) 6px 6px/12px 12px, radial-gradient(var(--color-gold) 1.4px, transparent 1.5px) 3px 9px/12px 12px, var(--color-paper)",
+  impressionism: "radial-gradient(circle at 20% 30%, var(--color-celadon) 0 18%, transparent 19%), radial-gradient(circle at 55% 20%, var(--color-gold) 0 16%, transparent 17%), radial-gradient(circle at 75% 55%, var(--color-terracotta) 0 20%, transparent 21%), radial-gradient(circle at 35% 70%, var(--color-pine) 0 17%, transparent 18%), var(--color-paper)",
+};
 
 export type SpaceId = "living" | "bedroom" | "entrance" | "study";
 
