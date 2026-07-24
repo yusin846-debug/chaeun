@@ -23,8 +23,8 @@ export function BrandMark({ compact = false, light = false }: BrandMarkProps) {
       <Image
         src="/images/chaeun-logo-official-transparent.png"
         alt="CHAEUN — Fill Your Space."
-        width={190}
-        height={187}
+        width={521}
+        height={531}
         priority={compact}
         className={`${compact ? "h-[74px] w-auto sm:h-[82px]" : "h-[150px] w-auto"} object-contain transition-transform duration-300 group-hover:scale-[1.02] ${light ? "brightness-0 invert" : ""}`}
       />

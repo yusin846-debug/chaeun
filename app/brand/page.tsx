@@ -34,7 +34,7 @@ export default function BrandPage() {
             <video className="block h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" poster="/images/chaeun-showroom.png">
               <source src="/videos/chaeun-brand-film.mp4#t=0.1" type="video/mp4" />
             </video>
-            <Image src="/images/chaeun-logo-official-transparent.png" alt="CHAEUN" width={120} height={40} className="absolute bottom-4 right-5 h-10 w-auto object-contain opacity-90" />
+            <Image src="/images/chaeun-logo-official-transparent.png" alt="CHAEUN" width={39} height={40} className="absolute bottom-4 right-5 h-10 w-auto object-contain opacity-90" />
           </div>
         </div>
       </section>
