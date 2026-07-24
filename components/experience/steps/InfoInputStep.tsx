@@ -27,11 +27,28 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
   const setSpace = useExperienceStore((s) => s.setSpace);
   const tasteRoundIndex = useExperienceStore((s) => s.tasteRoundIndex);
   const answerTaste = useExperienceStore((s) => s.answerTaste);
+  const previousTaste = useExperienceStore((s) => s.previousTaste);
+  const goTo = useExperienceStore((s) => s.goTo);
 
   const handleAnswer = (id: string) => {
     answerTaste(id);
     if (tasteRoundIndex + 1 >= TASTE_ROUNDS.length) {
       setTimeout(() => setPhase("birth"), 400);
+    }
+  };
+
+  const handleBack = () => {
+    if (phase === "birth") {
+      previousTaste();
+      setPhase("taste");
+    } else if (phase === "taste") {
+      if (tasteRoundIndex > 0) {
+        previousTaste();
+      } else {
+        setPhase("space");
+      }
+    } else {
+      goTo("landing");
     }
   };
 
@@ -43,7 +60,17 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
   };
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center gap-8 px-6 py-16">
+    <div className="relative flex min-h-svh flex-col items-center justify-center gap-8 px-6 py-16">
+      <button
+        type="button"
+        onClick={handleBack}
+        aria-label="이전으로"
+        className="absolute left-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-pine transition-colors hover:bg-pine/10 sm:left-6 sm:top-6"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
       <AnimatePresence mode="wait">
         {phase === "space" ? (
           <motion.div

@@ -24,6 +24,7 @@ interface ExperienceState {
   tasteAnswers: string[];
   tasteRoundIndex: number;
   answerTaste: (optionId: string) => void;
+  previousTaste: () => void;
 
   resultRevealed: boolean;
   revealResult: () => void;
@@ -54,6 +55,11 @@ export const useExperienceStore = create<ExperienceState>((set, get) => ({
     set((state) => ({
       tasteAnswers: [...state.tasteAnswers, optionId],
       tasteRoundIndex: state.tasteRoundIndex + 1,
+    })),
+  previousTaste: () =>
+    set((state) => ({
+      tasteAnswers: state.tasteAnswers.slice(0, -1),
+      tasteRoundIndex: Math.max(0, state.tasteRoundIndex - 1),
     })),
 
   resultRevealed: false,
