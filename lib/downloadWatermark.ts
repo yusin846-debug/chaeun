@@ -1,56 +1,62 @@
-export async function downloadWatermarkedImage(imageSrc: string, filename: string) {
+const QR_PATTERN = [
+  "1110101110111",
+  "1000101000101",
+  "1011101011101",
+  "0000001000001",
+  "1101011101101",
+  "0100010100010",
+  "1011100011101",
+  "0000101110000",
+  "1110001010111",
+  "1000111000100",
+  "0111010111010",
+  "1000100010001",
+  "1101110101110",
+];
+
+function loadImage(src: string): Promise<HTMLImageElement> {
   const img = new window.Image();
   img.crossOrigin = "anonymous";
-  await new Promise<void>((resolve, reject) => {
-    img.onload = () => resolve();
-    img.onerror = () => reject(new Error("이미지를 불러오지 못했습니다."));
-    img.src = imageSrc;
-  });
+  img.src = src;
+  return img.decode().then(() => img);
+}
+
+export async function downloadWatermarkedImage(imageSrc: string, filename: string) {
+  const img = await loadImage(imageSrc);
 
   const canvas = document.createElement("canvas");
   canvas.width = img.naturalWidth;
   canvas.height = img.naturalHeight;
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
-
   ctx.drawImage(img, 0, 0);
 
-  const badgeW = Math.round(canvas.width * 0.34);
-  const badgeH = Math.round(badgeW * 0.32);
-  const pad = Math.round(canvas.width * 0.035);
-  const x = pad;
-  const y = canvas.height - badgeH - pad;
-  const r = badgeH * 0.5;
+  const pad = canvas.width * 0.045;
+  const qrSize = canvas.width * 0.12;
+  const logoH = qrSize * 0.55;
+  const logo = await loadImage("/images/chaeun-logo-official-transparent.png");
+  const logoW = logoH * (logo.naturalWidth / logo.naturalHeight);
 
-  ctx.fillStyle = "rgba(20, 26, 23, 0.55)";
+  const boxW = qrSize + pad * 0.9 + logoW + pad * 0.6;
+  const boxH = qrSize + pad * 0.5;
+  const boxX = pad * 0.5;
+  const boxY = canvas.height - boxH - pad * 0.7;
+
+  ctx.fillStyle = "rgba(246,244,238,0.94)";
   ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + badgeW, y, x + badgeW, y + badgeH, r);
-  ctx.arcTo(x + badgeW, y + badgeH, x, y + badgeH, r);
-  ctx.arcTo(x, y + badgeH, x, y, r);
-  ctx.arcTo(x, y, x + badgeW, y, r);
-  ctx.closePath();
+  if (ctx.roundRect) ctx.roundRect(boxX, boxY, boxW, boxH, 14);
+  else ctx.rect(boxX, boxY, boxW, boxH);
   ctx.fill();
 
-  const qrSize = badgeH * 0.6;
-  const qrX = x + badgeH * 0.2;
-  const qrY = y + (badgeH - qrSize) / 2;
-  const cells = 5;
-  const cell = qrSize / cells;
-  ctx.fillStyle = "rgba(246, 244, 238, 0.92)";
-  for (let row = 0; row < cells; row++) {
-    for (let col = 0; col < cells; col++) {
-      const isCorner = (row < 2 && col < 2) || (row < 2 && col > cells - 3) || (row > cells - 3 && col < 2);
-      if (isCorner || (row + col) % 2 === 0) {
-        ctx.fillRect(qrX + col * cell, qrY + row * cell, cell * 0.86, cell * 0.86);
-      }
-    }
-  }
+  const cell = qrSize / QR_PATTERN.length;
+  ctx.fillStyle = "#315848";
+  QR_PATTERN.forEach((row, y) => {
+    row.split("").forEach((v, x) => {
+      if (v === "1") ctx.fillRect(boxX + pad * 0.25 + x * cell, boxY + pad * 0.25 + y * cell, cell * 0.85, cell * 0.85);
+    });
+  });
 
-  ctx.fillStyle = "rgba(246, 244, 238, 0.95)";
-  ctx.font = `600 ${Math.round(badgeH * 0.32)}px "Cormorant Garamond", serif`;
-  ctx.textBaseline = "middle";
-  ctx.fillText("CHAEUN", qrX + qrSize + badgeH * 0.22, y + badgeH / 2);
+  ctx.drawImage(logo, boxX + qrSize + pad * 0.5, boxY + (boxH - logoH) / 2, logoW, logoH);
 
   const blob: Blob | null = await new Promise((resolve) => canvas.toBlob((b) => resolve(b), "image/png"));
   if (!blob) return;

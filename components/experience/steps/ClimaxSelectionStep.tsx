@@ -33,7 +33,6 @@ export function ClimaxSelectionStep({ onSelect }: ClimaxSelectionStepProps) {
       } finally {
         setDownloading(false);
       }
-      return;
     }
     onSelect(selectedTier);
   };
