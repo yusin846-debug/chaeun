@@ -159,7 +159,6 @@ export function HomePage() {
               </div>
             ))}
           </div>
-          <p className="eyebrow">SAJU · PUNGSU · ART</p>
           <h1 id="hero-title">좋은 흐름을<br />당신의 공간에.</h1>
           <p>사주의 흐름을 읽고, 풍수의 원리를 담아<br className="hidden sm:block" /> 복이 머무는 하나의 풍경을 그립니다.</p>
           <Link className="text-link" href="#collection">CHAEUN을 경험하기 <span>↓</span></Link>
@@ -172,8 +171,8 @@ export function HomePage() {
           <div className="why-icon" ref={houseIconRef}>
             <Image src="/images/icon-house.png" alt="집 아이콘" width={88} height={88} />
           </div>
-          <div className="section-intro" style={{ padding: 0, margin: 0 }}>
-            <span>02 — FOR YOUR SPACE</span>
+          <div className="why-copy">
+            <span className="eyebrow">02 — FOR YOUR SPACE</span>
             <h2 id="collection-title">이사한 새집에,<br />왜 그림 한 점부터 걸까요?</h2>
             <p>대기업 총수의 집무실에도, 갓 이사한 신혼집에도 그림 한 점은 늘 신중하게 골라집니다. 매일 눈에 담는 풍경이 그 사람의 하루를, 나아가 삶의 방향을 조용히 바꿔놓기 때문이에요.</p>
           </div>
@@ -208,15 +207,15 @@ export function HomePage() {
       </section>
 
       <section className="slider-section" aria-labelledby="slider-title">
-        <div className="section-intro" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", maxWidth: 1280, textAlign: "left", padding: "0 1.5rem 2.5rem", margin: "0 auto" }}>
+        <div className="slider-header">
           <div>
-            <span>04 — THE COLLECTION</span>
-            <h2 id="slider-title" style={{ margin: "1rem 0 0" }}>풍경에서 오브제까지,<br />일상을 채우는 방법</h2>
+            <span className="eyebrow">04 — THE COLLECTION</span>
+            <h2 id="slider-title">풍경에서 오브제까지,<br />일상을 채우는 방법</h2>
           </div>
-        </div>
-        <div className="slider-controls">
-          <button onClick={() => moveSlider(-1)} aria-label="이전 컬렉션">←</button>
-          <button onClick={() => moveSlider(1)} aria-label="다음 컬렉션">→</button>
+          <div className="slider-controls">
+            <button onClick={() => moveSlider(-1)} aria-label="이전 컬렉션">←</button>
+            <button onClick={() => moveSlider(1)} aria-label="다음 컬렉션">→</button>
+          </div>
         </div>
         <div
           ref={sliderRef}

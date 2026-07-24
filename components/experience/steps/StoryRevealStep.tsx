@@ -1,68 +1,63 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { motion } from "motion/react";
-import { HalftoneBackground } from "@/components/ui/HalftoneBackground";
-import { OhaengWheel } from "@/components/ui/OhaengWheel";
-import { BackButton } from "@/components/ui/BackButton";
-import { OHAENG, getStoryLines } from "@/lib/content";
+import { AnimatePresence, motion } from "motion/react";
+import { getStoryLineColors, getStoryLines } from "@/lib/content";
 import { useExperienceStore } from "@/lib/store";
 
 interface StoryRevealStepProps {
   onComplete: () => void;
 }
 
-const SYNERGY_LINE_INDEX = 4;
-
 function readDuration(text: string) {
   return Math.min(3400, Math.max(1500, 700 + text.replace(/\n/g, "").length * 55));
 }
 
 export function StoryRevealStep({ onComplete }: StoryRevealStepProps) {
-  const [visibleCount, setVisibleCount] = useState(0);
-  const goTo = useExperienceStore((s) => s.goTo);
+  const [index, setIndex] = useState(0);
   const missingOhaeng = useExperienceStore((s) => s.missingOhaeng);
   const ohaengId = missingOhaeng();
-  const ohaeng = OHAENG[ohaengId];
   const lines = useMemo(() => getStoryLines(ohaengId), [ohaengId]);
+  const colors = useMemo(() => getStoryLineColors(ohaengId), [ohaengId]);
 
   useEffect(() => {
-    if (visibleCount >= lines.length) {
-      const t = setTimeout(onComplete, 1400);
-      return () => clearTimeout(t);
-    }
-    const t = setTimeout(() => setVisibleCount((c) => c + 1), readDuration(lines[visibleCount]));
+    const t = setTimeout(() => {
+      if (index + 1 >= lines.length) {
+        setTimeout(onComplete, 1400);
+      } else {
+        setIndex((i) => i + 1);
+      }
+    }, readDuration(lines[index]));
     return () => clearTimeout(t);
-  }, [visibleCount, lines, onComplete]);
+  }, [index, lines, onComplete]);
 
   return (
-    <div className="relative flex min-h-svh flex-col items-center justify-center gap-6 overflow-hidden px-6 py-16 text-center">
-      <BackButton onClick={() => goTo("info")} />
-      <HalftoneBackground accent={ohaeng.color} />
+    <div className="story-reveal">
+      <div className="story-glow" style={{ background: `radial-gradient(circle, ${colors[index]} 0%, transparent 70%)` }} />
 
-      <div className="relative z-10">
-        <OhaengWheel
-          highlight={ohaengId}
-          revealConnection={visibleCount > SYNERGY_LINE_INDEX}
-          size={180}
-        />
-      </div>
-
-      <div className="relative z-10 flex max-w-sm flex-col gap-3">
-        {lines.slice(0, visibleCount).map((line, i) => (
+      <div className="relative max-w-lg text-center">
+        <p className="text-[0.68rem] font-bold tracking-[0.28em] text-paper/50">READING YOUR FLOW</p>
+        <AnimatePresence mode="wait">
           <motion.p
-            key={line}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{
-              opacity: i === visibleCount - 1 ? 1 : 0.32,
-              y: 0,
-            }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="font-heading text-base leading-relaxed text-ink sm:text-lg"
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mt-6 flex min-h-[120px] items-center justify-center whitespace-pre-line font-heading text-lg font-semibold leading-[1.7] text-paper sm:text-xl"
           >
-            {line}
+            {lines[index]}
           </motion.p>
-        ))}
+        </AnimatePresence>
+
+        <div className="mt-10 flex justify-center gap-2">
+          {lines.map((line, i) => (
+            <span
+              key={line}
+              className="h-1.5 w-1.5 rounded-full transition-colors duration-300"
+              style={{ background: i <= index ? colors[i] : "rgba(246,244,238,.25)" }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -131,6 +131,20 @@ export function getStoryLines(id: OhaengId): string[] {
   ];
 }
 
+export function getStoryLineColors(id: OhaengId): string[] {
+  const rest = OHAENG_CYCLE.filter((e) => e !== id);
+  return [
+    OHAENG[id].color,
+    OHAENG[id].color,
+    OHAENG[rest[0]].color,
+    OHAENG[rest[1]].color,
+    OHAENG[rest[2]].color,
+    OHAENG[rest[3]].color,
+    "var(--color-celadon)",
+    "var(--color-terracotta)",
+  ];
+}
+
 export interface SwipeTasteOption {
   id: string;
   label: string;

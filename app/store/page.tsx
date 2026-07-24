@@ -155,8 +155,8 @@ export default function StorePage() {
                 alt={p.title}
                 fill
                 sizes="(max-width: 640px) 45vw, 30vw"
-                className="object-cover transition-transform duration-500 hover:scale-[1.04]"
-                style={{ objectPosition: p.focus ?? "center", transform: p.zoom ? `scale(${p.zoom})` : undefined }}
+                className="store-image object-cover"
+                style={{ objectPosition: p.focus ?? "center", "--zoom": p.zoom ?? 1 } as React.CSSProperties}
               />
               <span
                 className="absolute left-3.5 top-3.5 whitespace-nowrap rounded-full bg-paper/92 px-3 py-1 text-[11px] font-bold tracking-[0.06em]"
