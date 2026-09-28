@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:reading": "tsc --module commonjs --moduleResolution node --target es2020 --esModuleInterop --skipLibCheck --outDir .test-output tests/start-reading.test.ts && node --test .test-output/tests/start-reading.test.js"
+    "test:reading": "tsc --module commonjs --moduleResolution node --target es2020 --esModuleInterop --skipLibCheck --outDir .test-output tests/*.test.ts && node --test .test-output/tests/*.test.js"
   },
   "dependencies": {
     "motion": "^12.42.2",
