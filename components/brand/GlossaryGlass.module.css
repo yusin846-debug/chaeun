@@ -1,0 +1,10 @@
+.stage { height: clamp(300px, 31vw, 430px); position: relative; isolation: isolate; }
+.object { position: absolute; inset: 0 0 26px; opacity: 0; visibility: hidden; transform: translateY(12px) scale(.94); transition: opacity .45s ease, transform .65s cubic-bezier(.2,.8,.2,1), visibility .45s; pointer-events: none; }
+.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.float { position: relative; width: 100%; height: 100%; animation: bob 7s ease-in-out infinite; }
+.float img { object-fit: contain; filter: drop-shadow(0 16px 16px #0002); }
+.stage[data-paused='true'] .float { animation-play-state: paused; }
+.motion { position: absolute; right: 0; bottom: 0; background: transparent; border: 0; border-bottom: 1px solid #b6c5ac60; padding: 4px 0; color: #bdc4b6; font-size: 10px !important; }
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
+@media(max-width:760px) { .stage { height: 340px; max-height: 95vw; } }
+@media(prefers-reduced-motion:reduce) { .object { transition: none; } .float { animation: none; } .motion { display: none; } }
