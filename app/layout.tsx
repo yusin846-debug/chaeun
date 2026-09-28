@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Noto_Serif_KR } from "next/font/google";
+import { Bricolage_Grotesque, Cormorant_Garamond, Noto_Serif_KR } from "next/font/google";
 import { SiteHeader } from "@/components/nav/SiteHeader";
 import "./globals.css";
+
+const display = Bricolage_Grotesque({ variable: "--font-display", subsets: ["latin"], display: "swap" });
 
 const notoSerifKR = Noto_Serif_KR({
   variable: "--font-noto-serif-kr",
@@ -30,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${notoSerifKR.variable} ${cormorantGaramond.variable} h-full antialiased`}
+      className={`${display.variable} ${notoSerifKR.variable} ${cormorantGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-cream text-ink">
         <SiteHeader />

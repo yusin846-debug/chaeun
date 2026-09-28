@@ -1,0 +1,4 @@
+import { BrandShell, ReadingLink } from '@/components/brand/BrandShell';
+import { Glossary } from '@/components/brand/Glossary';
+import s from '@/components/brand/Brand.module.css';
+export default function AboutPage(){return <BrandShell><section className={s.subpage}><span className={s.sectionLabel}>THE WAY WE SEE IT</span><h1 className={s.pageTitle}>About us.</h1><p className={s.aboutStatement}>Your story.<br />Your space.<br /><strong>A little more you.</strong></p><p className={s.pageLead}>채운은 사주로 지금의 나와 고민을 읽고,<br />풍수로 나에게 필요한 기운을 채우는 방법을 제안해요.<br />나를 닮은 방, 나만을 위한 그림, 오래 곁에 둘 물건으로.</p><div className={s.method}>{[['01','먼저, 나의 이야기','태어난 시간과 지금의 마음을 함께 읽어요. 고민도, 불안도, 마음속 로망도 이야기의 시작이 됩니다.'],['02','다음은, 나를 둘러싼 풍경','내 기운과 동네, 창밖의 장면과 공간이 만나는 지점을 살펴봐요.'],['03','나의 방식으로 채우기','색과 소재, 개인화 이미지와 공간 추천. 내 삶에 어울리는 방식으로 제안해요.']].map(([n,t,p])=><article key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div><ReadingLink/></section><Glossary/></BrandShell>}

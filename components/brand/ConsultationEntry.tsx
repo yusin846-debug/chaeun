@@ -1,0 +1,18 @@
+'use client';
+import { useState } from 'react';
+import { create } from 'zustand';
+import { BrandShell } from './BrandShell';
+import { getTopic, topics } from './content';
+import s from './Brand.module.css';
+type Birth = { date:string; time:string; calendar:string; unknown:boolean };
+const useIntake = create<{birth:Birth|null;setBirth:(b:Birth)=>void}>(set=>({birth:null,setBirth:birth=>set({birth})}));
+const prompts:Record<string,string>={lonely:'집에 돌아왔을 때 특히 마음이 허전해지는 순간이 있어? 오늘은 어떤 하루였는지부터 들려줘.',love:'좋아하는 사람과 지금 어떤 사이야? 최근에 설레거나 답답했던 순간부터 들려줘.',career:'지금 하는 일을 더 잘하고 싶은 마음과 새롭게 시작하고 싶은 마음 중, 어느 쪽에 더 가까워?',money:'요즘 돈에 관한 어떤 생각이 가장 자주 들어? 안정감, 수입, 새로운 기회 중 어디부터 이야기해볼까?',rest:'몸은 쉬고 있는데 생각이 멈추지 않는 날이 있어? 요즘 가장 마음을 쓰게 하는 이야기를 들려줘.',taste:'자꾸 저장하게 되는 방이 있어? 어떤 색이나 가구가 마음에 들었는지부터 이야기해줘.',neighborhood:'지금 사는 동네는 어디야? 구와 동 정도면 충분해. 그곳에서 가장 좋아하는 풍경도 함께 들려줘.'};
+export function ConsultationEntry({topic}:{topic?:string}){
+ const birth=useIntake(x=>x.birth),save=useIntake(x=>x.setBirth);
+ const [editing,setEditing]=useState(!birth);
+ const [selected,setSelected]=useState(getTopic(topic)?.id??(topic==='neighborhood'?'neighborhood':''));
+ const [date,setDate]=useState(birth?.date??'');const [time,setTime]=useState(birth?.time??'');const [calendar,setCalendar]=useState(birth?.calendar??'solar');const [unknown,setUnknown]=useState(birth?.unknown??false);
+ const [draft,setDraft]=useState('');
+ const label=getTopic(selected)?.label??(selected==='neighborhood'?'동네 궁합':'나의 이야기');
+ return <BrandShell><section className={s.consult}><span className={s.sectionLabel}>{editing?'A MOMENT ABOUT YOU':'YOUR CONVERSATION'} <span>{label}</span></span><h1>{editing?<>Let’s start<br/>with you.</>:<>A little space<br/>to talk.</>}</h1>{editing?<><p>당신이 태어난 시간을 알려주세요.<br/>{selected?`${label} 이야기로 이어갈게요.`:'지금 가장 궁금한 이야기를 함께 골라요.'}</p><form className={s.birthForm} onSubmit={e=>{e.preventDefault();save({date,time:unknown?'':time,calendar,unknown});setEditing(false)}}><label>생년월일<input type="date" required value={date} max={new Date().toLocaleDateString('sv-SE')} onChange={e=>setDate(e.target.value)} /></label><div className={s.formRow}><label>달력<select value={calendar} onChange={e=>setCalendar(e.target.value)}><option value="solar">양력</option><option value="lunar">음력</option><option value="lunar-leap">음력 윤달</option></select></label><label>태어난 시간<input type="time" required={!unknown} disabled={unknown} value={time} onChange={e=>setTime(e.target.value)} /></label></div><label style={{display:'flex',alignItems:'center',gap:10}}><input type="checkbox" checked={unknown} onChange={e=>setUnknown(e.target.checked)} style={{width:18,minHeight:18}}/>태어난 시간을 몰라요</label><button className={s.cta} type="submit"><span>{selected?`${label} 이야기로 계속`:'이야기 선택하기'}</span><span className={s.arrow}>↗</span></button><p className={s.chatNote}>현재는 상담 진입 화면입니다. 생년일시는 서버로 전송하지 않으며, 실제 사주 분석은 아직 연결 전이에요.</p></form></>:<><button className={s.textLink} onClick={()=>setEditing(true)}>생년일시 수정 ↗</button>{!selected?<><p style={{marginTop:30}}>요즘 어떤 이야기가 가장 마음에 걸려?</p><div className={s.filters}>{topics.map(t=><button key={t.id} onClick={()=>setSelected(t.id)}>{t.label}</button>)}</div></>:<><div className={s.chatBubble}><span className={s.pet} role="img" aria-label="상담을 시작하는 고양이">🐈</span><p>{prompts[selected]}</p></div><label className={s.birthForm}>내 이야기<textarea rows={4} placeholder="편하게 적어주세요." value={draft} onChange={e=>setDraft(e.target.value)}/></label><p className={s.chatNote} style={{marginTop:18}}>상담 에이전트 연결을 준비하고 있어요. 지금 적은 내용은 전송되지 않고 이 화면에만 머물러요.</p><button className={s.textLink} onClick={()=>setSelected('')}>다른 이야기 고르기</button></>}</>}</section></BrandShell>;
+}

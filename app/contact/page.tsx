@@ -1,0 +1,3 @@
+import { BrandShell, ReadingLink } from '@/components/brand/BrandShell';
+import s from '@/components/brand/Brand.module.css';
+export default function ContactPage(){return <BrandShell><section className={s.subpage}><span className={s.sectionLabel}>LET’S START A CONVERSATION</span><h1 className={s.pageTitle}>Hello, you.</h1><p className={s.pageLead}>어떤 이야기를 들려주실래요?</p><div className={s.contactOptions}><article><h2>Your story.</h2><p>요즘의 고민과 마음에 드는 공간.<br/>나의 사주에서 이야기를 시작해요.</p><ReadingLink>내 이야기 시작하기</ReadingLink></article><article><h2>Something together.</h2><p>좋은 물건과 공간을 만드는 브랜드라면.<br/>채운과 함께할 새로운 이야기를 기다려요.</p><span className={s.pageNote}>브랜드 제휴 문의 채널을 준비하고 있어요.</span></article></div></section></BrandShell>}
