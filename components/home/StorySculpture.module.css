@@ -16,3 +16,5 @@
 .pause { margin-top:10px; font-size:10px; color:#d8ddd6; border-bottom:1px solid #d8ddd655; cursor:pointer; }
 @media(max-width:760px) { .pause { margin-top:5px; font-size:9px; } }
 @media(prefers-reduced-motion:reduce) { .pause { display:none; } }
+/* Pausing loops must not freeze a newly selected scene at opacity zero. */
+.paused .scene { animation:none; opacity:1; transform:none; }
