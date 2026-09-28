@@ -9,3 +9,11 @@
 .panel p { margin: 12px 0 8px !important; font-size: 11px; line-height: 1.6; color: #d7ddd1; }
 .panel a { color: #bbc7af; font-size: 12px; }
 @media (max-width: 760px) { .music { right: 16px; bottom: max(16px, env(safe-area-inset-bottom)); } }
+.tracks { display: grid; gap: 5px; margin-bottom: 12px; }
+.tracks button { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px; border: 1px solid transparent; border-radius: 10px; color: #f3f0e8; background: transparent; text-align: left; }
+.tracks button[aria-pressed='true'] { background: #b6c5ac19; border-color: #b6c5ac77; }
+.tracks button:hover { background: #b6c5ac25; }
+.tracks button > span:nth-child(2) { flex: 1; }
+.tracks strong { display: block; font-size: 13px; font-weight: 500; }
+.tracks small { display: block; margin-top: 3px; color: #bbc7af; font-size: 11px; }
+.number { font-size: 10px; color: #bbc7af; }
