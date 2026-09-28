@@ -181,3 +181,11 @@
 @media(max-height:700px) and (max-width:760px) { .storyCard p { display:none; }.storyCard { padding:15px 20px; }.storyNumber { margin-bottom:10px; }.heroBottom { display:none; }.heroComposition { grid-template-rows:1.2fr 1fr; } }
 @media(prefers-reduced-motion:reduce) { .storyTransition,.heroPhoto .storyImage { animation:none!important; transition:none!important; } }
 @media(max-height:650px) and (min-width:761px) { .storyCard { padding:20px; }.storyCard h1 { font-size:28px; }.storyNumber { margin-bottom:14px; }.storyCard p { display:none; }.storyNext { margin-top:14px; }.heroSticky .heroBottom { padding-top:12px; }.heroSticky .heroBottom p { font-size:14px; } }
+/* Keep the call to action stable and inside every story card. */
+.heroComposition { grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:28px; isolation:isolate; }
+.storyCard { overflow:hidden; border-radius:5px; }
+.cardAction { margin-top:25px; flex-shrink:0; }
+.cardAction .cta { background:#f6f4ee; font-size:13px; width:100%; max-width:330px; gap:10px; }
+.cardAction>span { display:block; font-size:10px; margin-top:10px; }
+@media(max-width:760px) { .heroComposition { grid-template-columns:minmax(0,1fr); gap:12px; grid-template-rows:1.15fr 1fr; }.cardAction { margin-top:14px; }.cardAction .cta { font-size:11px; padding:7px 7px 7px 13px; max-width:300px; }.cardAction .arrow { width:26px; height:26px; font-size:18px; }.cardAction>span { display:none; }.storyCard p { display:none; } }
+@media(max-height:650px) and (min-width:761px) { .cardAction { margin-top:10px; }.cardAction>span { display:none; } }
