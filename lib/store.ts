@@ -17,6 +17,7 @@ interface ProductOptionsState {
 interface ExperienceState {
   step: Step;
   goTo: (step: Step) => void;
+  startReading: () => void;
 
   birthInfo: BirthInfo;
   setBirthInfo: (patch: Partial<BirthInfo>) => void;
@@ -47,6 +48,16 @@ interface ExperienceState {
 export const useExperienceStore = create<ExperienceState>((set, get) => ({
   step: "info",
   goTo: (step) => set({ step }),
+  startReading: () => set({
+    step: "info",
+    tasteAnswers: [],
+    tasteRoundIndex: 0,
+    resultRevealed: false,
+    product: {
+      size: "a3", material: "canvas", addons: [], space: null,
+      structure: null, popupOpen: false, popupSeen: false,
+    },
+  }),
 
   birthInfo: { year: 1996, month: 6, day: 15, hour: 12 },
   setBirthInfo: (patch) =>

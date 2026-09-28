@@ -29,8 +29,8 @@ const cases = [
 ];
 
 function StartLink() {
-  const goTo = useExperienceStore((state) => state.goTo);
-  return <Link href="/create" className={styles.cta} onClick={() => goTo("info")}><span>내 사주에 어울리는 공간 보기</span><span className={styles.arrow} aria-hidden="true">↗</span></Link>;
+  const startReading = useExperienceStore((state) => state.startReading);
+  return <Link href="/create" className={styles.cta} onClick={startReading}><span>내 사주에 어울리는 공간 보기</span><span className={styles.arrow} aria-hidden="true">↗</span></Link>;
 }
 
 export function HomePage({ initialConcern }: { initialConcern?: string }) {
@@ -38,6 +38,8 @@ export function HomePage({ initialConcern }: { initialConcern?: string }) {
   const [concern, setConcern] = useState(() => Math.max(0, concerns.findIndex((item) => item.id === initialConcern)));
   const [room, setRoom] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
+  const railRef = useRef<HTMLElement>(null);
+  const pendingAnchor = useRef<{ id: string; expires: number } | null>(null);
   const current = concerns[concern];
 
   useEffect(() => {
@@ -50,7 +52,13 @@ export function HomePage({ initialConcern }: { initialConcern?: string }) {
         if ((document.getElementById(section.id)?.getBoundingClientRect().top ?? Infinity) <= marker) next = section.id;
       }
       if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) next = "objects";
-      setActive(next);
+      const pending = pendingAnchor.current;
+      if (pending) {
+        const top = document.getElementById(pending.id)?.getBoundingClientRect().top;
+        const offset = window.innerWidth < 760 ? 155 : 90;
+        if (top === undefined || Math.abs(top - offset) < 6 || performance.now() > pending.expires || window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) pendingAnchor.current = null;
+      }
+      setActive(pendingAnchor.current?.id ?? next);
       const hero = heroRef.current;
       if (hero && window.innerWidth < 760) {
         const progress = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / hero.offsetHeight));
@@ -58,16 +66,30 @@ export function HomePage({ initialConcern }: { initialConcern?: string }) {
       }
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const interrupt = () => { pendingAnchor.current = null; schedule(); };
+    const interruptKey = (event: KeyboardEvent) => {
+      if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) interrupt();
+    };
     schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
-    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); };
+    window.addEventListener("wheel", interrupt, { passive: true });
+    window.addEventListener("touchstart", interrupt, { passive: true });
+    window.addEventListener("keydown", interruptKey);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); window.removeEventListener("wheel", interrupt); window.removeEventListener("touchstart", interrupt); window.removeEventListener("keydown", interruptKey); };
   }, []);
+
+  useEffect(() => {
+    const rail = railRef.current;
+    const selected = rail?.querySelector<HTMLElement>('[aria-current="location"]');
+    if (!rail || !selected || rail.scrollWidth <= rail.clientWidth) return;
+    rail.scrollTo({ left: selected.offsetLeft - (rail.clientWidth - selected.offsetWidth) / 2, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  }, [active]);
 
   return <main className={styles.page}>
     <a className={styles.skip} href="#space">본문으로 건너뛰기</a>
     <header className={styles.header}><a href="#chaeun" className={styles.logo} aria-label="채운 첫 화면">CHAEUN<span>®</span></a><span className={styles.headerNote}>나의 이야기에서, 나의 공간으로.</span><StartLink /></header>
-    <nav className={styles.rail} aria-label="랜딩 목차">{sections.map((section, i) => <a key={section.id} href={`#${section.id}`} className={`${styles.tag} ${styles[section.shape]}`} aria-current={active === section.id ? "location" : undefined}><span className={styles.tagIndex}>0{i + 1}</span><span>{section.label}</span><span className={styles.tagArrow} aria-hidden="true">↗</span></a>)}</nav>
+    <nav ref={railRef} className={styles.rail} aria-label="랜딩 목차">{sections.map((section, i) => <a key={section.id} href={`#${section.id}`} onClick={() => { pendingAnchor.current = { id: section.id, expires: performance.now() + 2200 }; setActive(section.id); }} className={`${styles.tag} ${styles[section.shape]}`} aria-current={active === section.id ? "location" : undefined}><span className={styles.tagIndex}>0{i + 1}</span><span>{section.label}</span><span className={styles.tagArrow} aria-hidden="true">↗</span></a>)}</nav>
     <div className={styles.content}>
       <section id="chaeun" ref={heroRef} className={styles.hero} aria-labelledby="hero-title">
         <div className={styles.heroTop}><span className={styles.eyebrow}>FOR THE WAY YOU FEEL</span><span className={styles.small}>요즘, 어떤 마음인가요?</span></div>
