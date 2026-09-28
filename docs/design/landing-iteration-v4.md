@@ -17,3 +17,9 @@ This iteration implements the brand landing and separate page shells. Birth entr
 ## Validation
 
 Production build, TypeScript and scoped ESLint; existing reading tests. Browser review covers the responsive menu, topic selection, glossary and object gallery. Static anchors replace sticky-element scroll targets so jumping back into the story stack selects the correct scene. Generated assets inspected individually and in their actual card crops. Prompts: image-prompts-v4.md.
+
+## Final review
+
+- Standards review: one intake issue found and fixed. Lunar dates use a dedicated YYYY-MM-DD field allowing a 30th day in month two rather than Gregorian date validation. Calendar conversion remains outside this prototype.
+- Spec review: no source-level violations found against this iteration's scope.
+- Browser: collection filter selects only lighting; all four object photos load and preserve silhouettes. Responsive menu links to Shop; glossary switches to Feng Shui content; lunar input proceeds to the selected love greeting. Existing two tests pass (they cover earlier reading reset/scroll helpers, not the new visual stack).
