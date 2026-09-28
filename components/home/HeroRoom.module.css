@@ -1,0 +1,14 @@
+.room { position: relative; }
+.photo img { object-position: center !important; }
+.hint { position: absolute; left: 20px; top: 20px; padding: 10px 15px; border-radius: 24px; background: #252722bb; color: #fff; font-size: 11px; pointer-events: none; }
+.point { position: absolute; width: 44px; height: 44px; transform: translate(-50%,-50%); display: grid; place-items: center; border: 1px solid #ffffffa0; border-radius: 50%; background: #25272270; color: #fff; backdrop-filter: blur(5px); transition: background .2s, box-shadow .2s; }
+.point span { font-size: 25px; font-weight: 300; }
+.point:hover,.point[aria-expanded=true] { background: #315848; box-shadow: 0 0 0 7px #ffffff25; }
+.detail { position: absolute; z-index: 3; right: 22px; bottom: 60px; width: 280px; max-width: calc(100% - 36px); padding: 20px; border-radius: 18px; color: #252722; background: #f6f1e8f5; box-shadow: 0 10px 35px #0002; animation: appear .22s ease-out; }
+.detail>div { display: flex; align-items: center; justify-content: space-between; color: #315848; font-size: 12px; }
+.detail button { border: 0; color: #252722; background: transparent; font-size: 22px; width: 32px; height: 32px; }
+.detail h3 { font-size: 17px; margin: 5px 0 10px !important; }
+.detail p { font-size: 13px; line-height: 1.75; }
+@keyframes appear { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
+@media(max-width:760px) { .photo { height: auto !important; min-height: 0; aspect-ratio: 3/2; } .hint { top: 10px; left: 10px; padding: 7px 10px; font-size: 9px; } .photo>div:last-child { display: none; } .detail { position: relative; right: auto; bottom: auto; width: 100%; max-width: none; margin-top: 12px; } .point { width: 40px; height: 40px; } }
+@media(prefers-reduced-motion:reduce) { .detail { animation: none; } .point { transition: none; } }

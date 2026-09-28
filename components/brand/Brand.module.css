@@ -9,3 +9,5 @@
 .storyAnchor{display:block;height:1px;scroll-margin-top:115px;pointer-events:none}
 @media(max-width:760px){.storyAnchor{scroll-margin-top:260px}}
 @media(max-height:730px) and (max-width:760px){.storyAnchor{scroll-margin-top:205px}}
+.headerCta{opacity:1;transform:translateY(0);visibility:visible;transition:opacity .3s,transform .45s cubic-bezier(.2,.8,.2,1),visibility .3s}.headerCtaHidden{opacity:0;transform:translateY(-24px);visibility:hidden;pointer-events:none}
+.neighborhood .cta,.artCopy .cta{background:#315848;color:#fff;box-shadow:0 5px 0 #213d32;transition:background .2s,transform .2s,box-shadow .2s}.neighborhood .cta .arrow,.artCopy .cta .arrow{background:#f3f0e8;color:#315848}.neighborhood .cta:hover,.artCopy .cta:hover{background:#244337;transform:translateY(-2px);box-shadow:0 7px 0 #1b3028}.storyTeaser .textLink,.collectionFooter .textLink{display:inline-flex;padding:16px 23px;border:0;border-radius:40px;background:#315848;color:#fff}.collectionFooter .textLink{background:#dfbd87;color:#252722}.finalCta .cta{box-shadow:0 5px 0 #718167}
