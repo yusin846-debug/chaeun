@@ -151,7 +151,7 @@
 .heroSticky { position:sticky; top:92px; height:calc(100svh - 92px); padding:23px 0 18px; display:flex; flex-direction:column; }
 .heroSticky .concerns { margin:15px 0 20px; }
 .heroComposition { flex:1; min-height:0; max-height:650px; }
-.storyCard { animation:cardTurn .5s cubic-bezier(.22,1,.36,1); transform-origin:bottom left; }
+.storyTransition { animation:cardTurn .5s cubic-bezier(.22,1,.36,1); transform-origin:bottom left; }
 .storyNumber { margin-bottom:clamp(15px,4vh,50px); }
 .heroPhoto .storyImage { transition:opacity .55s ease; }
 .heroBottom { padding-top:20px; padding-bottom:8px; }
@@ -179,5 +179,5 @@
  .resultPreview { grid-template-columns:1fr; gap:18px; margin-bottom:40px; }.neighborhood,.interiorPreview { padding:25px; }.resultPreview h3 { font-size:28px; }.interiorPreview>div { height:250px; }.brandLogo { width:140px; height:65px; padding:12px; }.brandLogo img { max-width:115px; max-height:40px; }.objectGrid { gap:26px 14px; }.objectGrid h3 { font-size:14px; }.objectGrid p { font-size:11px; }.objectIntro { font-size:14px; }.objectImage { border-radius:45px 45px 4px 4px; }
 }
 @media(max-height:700px) and (max-width:760px) { .storyCard p { display:none; }.storyCard { padding:15px 20px; }.storyNumber { margin-bottom:10px; }.heroBottom { display:none; }.heroComposition { grid-template-rows:1.2fr 1fr; } }
-@media(prefers-reduced-motion:reduce) { .storyCard,.heroPhoto .storyImage { animation:none!important; transition:none!important; } }
+@media(prefers-reduced-motion:reduce) { .storyTransition,.heroPhoto .storyImage { animation:none!important; transition:none!important; } }
 @media(max-height:650px) and (min-width:761px) { .storyCard { padding:20px; }.storyCard h1 { font-size:28px; }.storyNumber { margin-bottom:14px; }.storyCard p { display:none; }.storyNext { margin-top:14px; }.heroSticky .heroBottom { padding-top:12px; }.heroSticky .heroBottom p { font-size:14px; } }
