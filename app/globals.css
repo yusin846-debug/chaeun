@@ -61,6 +61,9 @@ body {
 }
 
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 a, button { outline-offset: 5px; }
 
 .eyebrow, .lifestyle-copy > span {

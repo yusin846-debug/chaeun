@@ -10,6 +10,9 @@ export function SiteHeader() {
   const step = useExperienceStore((s) => s.step);
   const inWizard = pathname === "/create";
 
+  // The landing owns its editorial header and section navigation.
+  if (pathname === "/") return null;
+
   // 06 Story Reveal.dc.html has no header at all — the reveal is a full-bleed
   // dark transition with zero navigation chrome.
   if (inWizard && step === "story") return null;

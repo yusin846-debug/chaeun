@@ -45,7 +45,7 @@ interface ExperienceState {
 }
 
 export const useExperienceStore = create<ExperienceState>((set, get) => ({
-  step: "landing",
+  step: "info",
   goTo: (step) => set({ step }),
 
   birthInfo: { year: 1996, month: 6, day: 15, hour: 12 },

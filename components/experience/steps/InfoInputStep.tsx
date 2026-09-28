@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { RollingPicker } from "@/components/ui/RollingPicker";
 import { SwipeCard } from "@/components/ui/SwipeCard";
@@ -20,6 +21,7 @@ interface InfoInputStepProps {
 }
 
 export function InfoInputStep({ onComplete }: InfoInputStepProps) {
+  const router = useRouter();
   const [phase, setPhase] = useState<"birth" | "taste">("birth");
   const [customScene, setCustomScene] = useState("");
   const birthInfo = useExperienceStore((s) => s.birthInfo);
@@ -29,7 +31,6 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
   const tasteRoundIndex = useExperienceStore((s) => s.tasteRoundIndex);
   const answerTaste = useExperienceStore((s) => s.answerTaste);
   const previousTaste = useExperienceStore((s) => s.previousTaste);
-  const goTo = useExperienceStore((s) => s.goTo);
 
   const handleAnswer = (id: string) => {
     answerTaste(id);
@@ -51,7 +52,7 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
         setPhase("birth");
       }
     } else {
-      goTo("landing");
+      router.push("/");
     }
   };
 
@@ -72,8 +73,8 @@ export function InfoInputStep({ onComplete }: InfoInputStepProps) {
           >
             <div className="text-center">
               <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-terracotta">STEP 1 · 사주</p>
-              <h2 className="mt-3 font-heading text-2xl font-semibold tracking-[-0.03em] text-ink">운명의 결이 흐르기 시작한<br />당신의 출생 순간을 알려주세요.</h2>
-              <p className="mt-3 text-sm leading-6 text-ink/55">생년월일과 시간을 바탕으로 당신에게 필요한 오행의 기운을 찾아드려요.</p>
+              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-ink">당신에게 어울리는 공간,<br />태어난 순간부터 알아볼게요.</h2>
+              <p className="mt-3 text-sm leading-6 text-ink/70">먼저 생년월일과 태어난 시간을 알려주세요.</p>
             </div>
 
             <div className="flex w-full flex-col gap-2 border-t border-mist pt-5">

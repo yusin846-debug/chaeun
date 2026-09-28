@@ -19,7 +19,7 @@ const cormorantGaramond = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "CHAEUN — Fill Your Space.",
   description:
-    "사주로 부족한 오행을 찾고, 풍수로 보완하는 맞춤 풍경 이미지를 액자·굿즈로 만나보세요.",
+    "사주로 지금의 나와 고민을 읽고, 풍수로 나에게 어울리는 공간과 맞춤 아트를 만나보세요.",
 };
 
 export default function RootLayout({
