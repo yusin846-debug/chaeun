@@ -12,6 +12,7 @@ const tracks = [
 export function HomeMusic() {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
+  const [showTracks, setShowTracks] = useState(false);
   const track = tracks[selected];
   const playlist = [...tracks.slice(selected), ...tracks.slice(0, selected)];
 
@@ -20,12 +21,13 @@ export function HomeMusic() {
       {open && (
         <div id="home-music-player" className={styles.panel}>
           <div className={styles.heading}>
-            <span>THE CHAEUN SOUNDTRACK</span>
+            <span>♫</span>
+            <button className={styles.listToggle} aria-expanded={showTracks} aria-controls="home-music-tracks" onClick={() => setShowTracks(!showTracks)}>{showTracks ? '목록 접기 −' : '곡 선택 +'}</button>
             <button onClick={() => setOpen(false)} aria-label="배경음악 정지하고 닫기">×</button>
           </div>
-          <div className={styles.tracks} role="group" aria-label="배경음악 곡 선택">
+          <div id="home-music-tracks" hidden={!showTracks} className={styles.tracks} role="group" aria-label="배경음악 곡 선택">
             {tracks.map((item, index) => (
-              <button key={item.id} aria-pressed={selected === index} onClick={() => setSelected(index)}>
+              <button key={item.id} aria-pressed={selected === index} onClick={() => { setSelected(index); setShowTracks(false); }}>
                 <span className={styles.number}>0{index + 1}</span>
                 <span><strong>{item.title}</strong><small>{item.artist}</small></span>
                 <span aria-hidden="true">↗</span>
@@ -40,19 +42,18 @@ export function HomeMusic() {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           />
-          <p>선택한 곡부터 세 곡을 이어서 들어요. 재생이 안 되면 YouTube에서 들어주세요.</p>
-          <a href={`https://www.youtube.com/watch?v=${track.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 듣기 ↗</a>
+
         </div>
       )}
-      <button
+      {!open && <button
         className={styles.toggle}
         aria-expanded={open}
         aria-controls={open ? 'home-music-player' : undefined}
-        onClick={() => setOpen(!open)}
+        onClick={() => { setShowTracks(false); setOpen(true); }}
       >
         <span aria-hidden="true">♫</span>
-        {open ? '음악 끄기' : '음악 켜기'}
-      </button>
+        음악 켜기
+      </button>}
     </aside>
   );
 }
