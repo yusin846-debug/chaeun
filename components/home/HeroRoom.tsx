@@ -6,10 +6,10 @@ import brand from '../brand/Brand.module.css';
 import styles from './HeroRoom.module.css';
 
 const objects = [
-  { id: 'cushion', name: '보드라운 쿠션', element: '土 · 토', x: .20, y: .55, text: '포근한 촉감과 크림색은 토의 안정감을 떠올리게 해요. 편히 기대고 싶은 분위기를 만들어요.' },
-  { id: 'lamp', name: '따뜻한 조명', element: '火 · 화', x: .595, y: .57, text: '따뜻한 빛과 버건디 색은 화의 온기와 생동감을 상징해요. 방에 다정한 표정을 더해요.' },
-  { id: 'vase', name: '초록빛 화병과 꽃', element: '木 · 목', x: .505, y: .385, text: '초록색과 위로 자라는 꽃은 목의 성장과 시작을 떠올리게 해요. 작은 생기를 가까이 두는 방법이에요.' },
-  { id: 'art', name: '곡선이 담긴 액자', element: '土 · 토', x: .438, y: .19, text: '모래빛 색과 완만한 곡선은 토의 차분함을 떠올리게 해요. 시선이 쉬어가는 장면을 만들어요.' },
+  { id: 'cushion', name: '보드라운 쿠션', element: '土 · 토', x: .20, y: .55, text: '토의 안정감을 담은 크림색 쿠션. 바쁜 하루 뒤에는 나를 편히 돌보고, 관계 속에서도 내 중심을 지키는 마음을 위한 소품이에요.' },
+  { id: 'lamp', name: '따뜻한 조명', element: '火 · 화', x: .595, y: .57, text: '화의 온기를 담은 따뜻한 빛과 버건디 색. 좋아하는 마음을 조금 더 솔직하게 표현하고, 새로운 인연에 먼저 다가갈 자신감을 북돋는 포인트예요.' },
+  { id: 'vase', name: '초록빛 화병과 꽃', element: '木 · 목', x: .505, y: .385, text: '목은 성장과 시작을 상징해요. 초록빛 화병과 위로 뻗는 꽃에, 익숙한 하루에서 한 걸음 나아가 새로운 만남을 시작할 용기를 담았어요.' },
+  { id: 'art', name: '곡선이 담긴 액자', element: '土 · 토', x: .438, y: .19, text: '토의 차분함을 담은 모래빛 그림. 조급한 마음을 잠시 내려놓고, 나의 속도로 관계를 이어갈 여유와 안정감을 위한 장면이에요.' },
 ];
 
 export function HeroRoom() {
@@ -46,6 +46,11 @@ export function HeroRoom() {
   };
 
   return <div className={styles.room} onKeyDown={event => { if (event.key === 'Escape') setActive(null); }}>
+    <aside className={styles.flowNotice} aria-label="이 방에 담긴 풍수 이야기">
+      <span className={styles.flowMark} aria-hidden="true">木 <i>→</i> 火 <i>→</i> 土</span>
+      <div><span className={styles.flowEyebrow}>FENG SHUI FOR A NEW CHAPTER</span><p><strong>목 → 화 → 토로 흐르는 기운을 개선하여,</strong><br />안정감과 용기, 그리고 새로운 인연에 대한 자신감을 북돋아 주는 풍수 인테리어.</p></div>
+      <span className={styles.flowHint}>소품에 마우스를 올려보세요<span>모바일에서는 +를 눌러보세요 ↘</span></span>
+    </aside>
     <div ref={photo} className={`${brand.heroPhoto} ${styles.photo}`} onPointerMove={event => {
       if (event.pointerType === 'touch') return;
       const rect = event.currentTarget.getBoundingClientRect();
@@ -60,7 +65,6 @@ export function HeroRoom() {
     }}>
       <Image src="/images/landing/room-editorial.webp" alt="쿠션, 조명, 화병과 액자에 담긴 기운을 살펴볼 수 있는 아늑한 작은 방" fill preload sizes="(max-width:760px) 100vw, 86vw"/>
       <div className={brand.lightBeam}/>
-      <span className={styles.hint}>작은 +를 눌러, 공간의 기운을 만나보세요</span>
       {size.width > 0 && objects.map(item => {
         const point = position(item.x, item.y);
         return <button key={item.id} style={point} className={styles.point} aria-label={`${item.name}의 오행 의미`} aria-expanded={active === item.id} aria-controls={active === item.id ? 'room-object-detail' : undefined}

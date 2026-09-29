@@ -12,3 +12,10 @@
 @keyframes appear { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
 @media(max-width:760px) { .photo { height: auto !important; min-height: 0; aspect-ratio: 3/2; } .hint { top: 10px; left: 10px; padding: 7px 10px; font-size: 9px; } .photo>div:last-child { display: none; } .detail { position: relative; right: auto; bottom: auto; width: 100%; max-width: none; margin-top: 12px; } .point { width: 40px; height: 40px; } }
 @media(prefers-reduced-motion:reduce) { .detail { animation: none; } .point { transition: none; } }
+
+.flowNotice{display:flex;align-items:center;gap:24px;background:#d9dfcf;color:#293e31;padding:25px 28px;border-radius:20px 20px 0 0;border-bottom:1px solid #a9b89d;margin-bottom:12px}
+.flowMark{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:24px;border:1px solid #a1b098;border-radius:40px;padding:14px 18px}.flowMark i{font-family:var(--font-display),sans-serif;font-size:16px;font-style:normal;color:#74866b}
+.flowEyebrow{display:block;font-size:9px;letter-spacing:.13em;margin-bottom:8px;color:#59704f}.flowNotice p{font-size:15px;line-height:1.8;word-break:keep-all}.flowNotice p strong{font-weight:600}.flowHint{margin-left:auto;flex-shrink:0;font-size:11px;line-height:1.8;color:#4d6545}.flowHint span{display:block;font-size:10px;color:#64765c}
+.point:focus-visible{outline:3px solid #f3f0e8;outline-offset:5px}
+@media(max-width:1100px){.flowNotice{flex-wrap:wrap;gap:18px}.flowHint{width:100%;margin-left:0;display:flex;gap:12px}.flowMark{font-size:21px;padding:10px 14px}}
+@media(max-width:760px){.flowNotice{padding:20px 18px;gap:15px;border-radius:16px 16px 0 0;margin-bottom:8px}.flowMark{font-size:18px;padding:8px 13px}.flowNotice p{font-size:14px;line-height:1.8}.flowEyebrow{font-size:8px}.flowHint{font-size:0}.flowHint span{font-size:11px}}
