@@ -1,13 +1,14 @@
+import Image from 'next/image';
 import { BrandShell, ReadingLink } from '@/components/brand/BrandShell';
 import { Glossary } from '@/components/brand/Glossary';
 import s from '@/components/brand/Brand.module.css';
 import a from './page.module.css';
 
 const readings = [
-  { category: 'Architecture', source: 'HSBC · Norman Foster', title: '미래적인 건축 안에, 풍수의 시선을.', original: 'Back to the future: Architect Lord Norman Foster revisits our Hong Kong HQ', text: '영국 건축가 노먼 포스터는 홍콩 HSBC 본점의 에스컬레이터 축에 풍수 전문가의 조언을 반영했다고 회고합니다. 현대 건축과 지역의 문화가 만나는 실제 설계 이야기입니다.', note: '풍수를 활용한 건축 사례이며, 효과를 검증한 연구는 아닙니다.', url: 'https://www.hsbc.com/news-and-views/news/hsbc-news-archive/back-to-the-future', symbol: '↗' },
-  { category: 'Interview', source: '디자인플러스 · 유현준 · 2025', title: '공간을 설계한다는 건, 관계를 디자인하는 일.', original: '홍익대학교 유현준 교수 — 어쩌면 공간 그 이상의 이야기', text: '건축가 유현준은 건축을 사람과 사회의 관계로 바라봅니다. 자연을 접하는 학교, 함께 머무는 공간에 대한 이야기를 통해 좋은 공간이 일상에 어떤 가능성을 만드는지 읽어보세요.', note: '건축가의 공간 철학을 다룬 인터뷰로, 사주·풍수에 대한 추천이나 검증은 아닙니다.', url: 'https://design.co.kr/article/104073/', symbol: '“' },
-  { category: 'Research', source: 'Journal of Clinical Sleep Medicine · 2014', title: '낮에 만나는 빛과, 밤에 누리는 쉼.', original: 'Impact of Windows and Daylight Exposure on Overall Health and Sleep Quality of Office Workers', text: '직장인 49명을 살펴본 소규모 연구에서 창이 있는 업무 환경은 더 나은 수면·삶의 질 지표와 관련이 있었습니다. 채운이 창과 채광을 함께 묻는 이유를 생각해볼 수 있는 자료입니다.', note: '관찰 연구로, 빛이 결과의 원인이라고 확정하거나 개인에게 같은 효과를 보장할 수는 없습니다.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4031400/', symbol: '☼' },
-  { category: 'Research', source: 'Science · Roger S. Ulrich · 1984', title: '창밖의 풍경도, 공간의 일부니까.', original: 'View through a window may influence recovery from surgery', text: '수술 환자 46명의 기록을 비교한 연구에서는 자연이 보이는 병실의 환자들이 벽이 보이는 병실의 환자들보다 입원 기간이 짧고 강한 진통제를 덜 사용했습니다.', note: '특정 병원의 후향적 비교입니다. 일반 주거의 효과나 풍수 이론 전체를 입증하는 결과는 아닙니다.', url: 'https://pubmed.ncbi.nlm.nih.gov/6143402/', symbol: '⌁' },
+  { category: 'Architecture', source: 'HSBC · Norman Foster', title: '미래적인 건축 안에, 풍수의 시선을.', original: 'Back to the future: Architect Lord Norman Foster revisits our Hong Kong HQ', text: '영국 건축가 노먼 포스터는 홍콩 HSBC 본점의 에스컬레이터 축에 풍수 전문가의 조언을 반영했다고 회고합니다. 현대 건축과 지역의 문화가 만나는 실제 설계 이야기입니다.', note: '풍수를 활용한 건축 사례이며, 효과를 검증한 연구는 아닙니다.', url: 'https://www.hsbc.com/news-and-views/news/hsbc-news-archive/back-to-the-future', image: '/images/editorial/hsbc-atrium.webp', imageAlt: '홍콩 HSBC 본점의 아트리움과 에스컬레이터', logo: '/images/editorial/hsbc-logo.png', logoAlt: 'HSBC', credit: '사진 · HSBC 공식 기사', date: '17 JUN 2026' },
+  { category: 'Interview', source: '디자인플러스 · 유현준 · 2025', title: '공간을 설계한다는 건, 관계를 디자인하는 일.', original: '홍익대학교 유현준 교수 — 어쩌면 공간 그 이상의 이야기', text: '건축가 유현준은 건축을 사람과 사회의 관계로 바라봅니다. 자연을 접하는 학교, 함께 머무는 공간에 대한 이야기를 통해 좋은 공간이 일상에 어떤 가능성을 만드는지 읽어보세요.', note: '건축가의 공간 철학을 다룬 인터뷰로, 사주·풍수에 대한 추천이나 검증은 아닙니다.', url: 'https://design.co.kr/article/104073/', image: '/images/editorial/yoo-portrait.webp', imageAlt: '건축가 유현준의 인터뷰 인물 사진', logo: '/images/editorial/designplus-logo.png', logoAlt: 'Design+', credit: '사진 · 윤선웅(에스플러스튜디오) / 디자인플러스', date: '02 JAN 2025' },
+  { category: 'Research', source: 'Journal of Clinical Sleep Medicine · 2014', title: '낮에 만나는 빛과, 밤에 누리는 쉼.', original: 'Impact of Windows and Daylight Exposure on Overall Health and Sleep Quality of Office Workers', text: '직장인 49명을 살펴본 소규모 연구에서 창이 있는 업무 환경은 더 나은 수면·삶의 질 지표와 관련이 있었습니다. 채운이 창과 채광을 함께 묻는 이유를 생각해볼 수 있는 자료입니다.', note: '관찰 연구로, 빛이 결과의 원인이라고 확정하거나 개인에게 같은 효과를 보장할 수는 없습니다.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4031400/', journal: 'JCSM', date: '15 JUN 2014', doi: '10.5664/jcsm.3780' },
+  { category: 'Research', source: 'Science · Roger S. Ulrich · 1984', title: '창밖의 풍경도, 공간의 일부니까.', original: 'View through a window may influence recovery from surgery', text: '수술 환자 46명의 기록을 비교한 연구에서는 자연이 보이는 병실의 환자들이 벽이 보이는 병실의 환자들보다 입원 기간이 짧고 강한 진통제를 덜 사용했습니다.', note: '특정 병원의 후향적 비교입니다. 일반 주거의 효과나 풍수 이론 전체를 입증하는 결과는 아닙니다.', url: 'https://pubmed.ncbi.nlm.nih.gov/6143402/', journal: 'Science', date: '27 APR 1984', doi: '10.1126/science.6143402' },
 ];
 
 export default function AboutPage() {
@@ -43,10 +44,10 @@ export default function AboutPage() {
     </section>
     <section id="reading-room" className={a.library} aria-labelledby="reading-title">
       <div className={a.libraryHeader}><div><span className={s.sectionLabel}>03 / MEDIA & RESEARCH</span><h2 id="reading-title">The reading room<span>.</span></h2></div><p>좋은 공간을 생각하게 하는 이야기들.<br />건축가의 관점부터 연구 원문까지 직접 읽어보세요.</p></div>
-      <ol className={a.mediaList}>{readings.map((item, i) => <li key={item.url}>
+      <ol className={a.mediaList}>{readings.map((item, i) => <li key={item.url} className={item.image ? a.featuredArticle : a.researchArticle}>
         <a className={a.mediaRow} href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`${item.title} — 원문 새 탭에서 읽기`}>
-          <span className={a.mediaVisual} data-kind={item.category} aria-hidden="true"><small>0{i + 1}</small><span>{item.symbol}</span></span>
-          <div className={a.mediaBody}><div className={a.metadata}><span>{item.category}</span>{item.source}</div><h3>{item.title}</h3><p>{item.text}</p><span className={a.original}>{item.original}</span><small className={a.limit}>{item.note}</small></div>
+          {item.image ? <figure className={a.articlePhoto}><div className={a.photoFrame}><Image src={item.image} alt={item.imageAlt!} fill sizes="(max-width: 760px) 100vw, 45vw" className={i === 1 ? a.portrait : undefined} /><span className={a.photoCategory}>{item.category}</span></div><figcaption>{item.credit}</figcaption></figure> : <div className={a.paperPreview} aria-hidden="true"><small>RESEARCH PAPER / 0{i + 1}</small><strong>{item.journal}</strong><span>{item.original}</span><i>DOI {item.doi}</i></div>}
+          <div className={a.mediaBody}>{item.logo && <div className={a.publisher}><Image src={item.logo} alt={item.logoAlt!} width={120} height={40} unoptimized /><span>{item.date}</span></div>}<div className={a.metadata}><span>{item.category}</span>{item.source}</div><h3>{item.title}</h3><p>{item.text}</p><span className={a.original}>{item.original}</span><small className={a.limit}>{item.note}</small><span className={a.articleRead}>원문 읽기 <span aria-hidden="true">↗</span></span></div>
           <span className={a.mediaArrow} aria-hidden="true">↗</span>
         </a>
       </li>)}</ol>

@@ -12,3 +12,10 @@ Environmental studies do not validate saju, five-element prescriptions, luck, we
 
 ## Verification
 Scoped ESLint and production build passed. Desktop introduction and reading-room visual inspection passed; all four direct source links present. Responsive layout verified at browser-reported 487px with no horizontal document overflow (requested 390px viewport was scaled by the browser surface).
+
+## Editorial assets (2026-09-29)
+- HSBC official logo converted from source SVG to transparent PNG: https://www.hsbc.com/-/files/hsbc/header/hsbc-logo-200x25.svg
+- HSBC atrium photo, linked article thumbnail: https://www.hsbc.com/-/files/hsbc/news-and-insight/2026/middle-images/260605-image-8-768x576.jpg
+- Design+ official logo converted from source SVG to transparent PNG: https://design-plus.storage.googleapis.com/wp-content/uploads/2024/02/05215111/logo.svg
+- Yoo Hyun-joon portrait: https://design-plus.storage.googleapis.com/wp-content/uploads/2024/12/05173420/20241226_090646-832x1248.jpg — portrait credit from article: 윤선웅(에스플러스튜디오). Photo positioned to retain subject in landscape thumbnail.
+- Photos serve as linked editorial previews, with source captions. Logos identify the publishers, not partners. Research previews are HTML bibliographic cards, not reproductions of journal covers.
