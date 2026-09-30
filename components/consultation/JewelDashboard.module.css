@@ -9,3 +9,20 @@
 .balance{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}.balance article{padding:24px;background:#d3e1c7;border-radius:8px 35px 8px 8px}.balance article+article{background:#ede0cd}.balance article>span{font-size:10px;letter-spacing:.12em;color:#627057}.balance h4{font-size:24px;margin:12px 0 20px}.balance strong{font-size:16px;line-height:1.6}.balance p{font-size:14px;line-height:1.9}.balance small{font-size:10px;color:#756a58}.objectCard:last-child:nth-child(odd){align-items:start}@media(max-width:760px){.balance{grid-template-columns:1fr}.balance article{padding:20px}}
 
 .box h2,.box h3,.box h4,.box p{word-break:keep-all;overflow-wrap:anywhere}
+
+/* Equal-height content keeps every action on the same row. */
+.objectCard{display:flex;flex-direction:column;min-width:0}
+.objectCopy{display:flex;flex-direction:column;flex:1;min-width:0}
+.objectCopy>strong{line-height:1.6}
+.itemTraits{display:grid;gap:12px;margin:22px 0;padding:18px 0;border-top:1px solid #cbd2c1;border-bottom:1px solid #cbd2c1}
+.itemTraits>div{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;align-items:center}
+.itemTraits dt{font-size:11px;color:#6c7567}
+.itemTraits dd{margin:0;font-size:13px;font-weight:550;line-height:1.6;word-break:keep-all}
+.itemElements{display:flex;flex-wrap:wrap;gap:8px 14px}
+.itemElements>span{display:inline-flex;align-items:center;gap:5px}
+.itemElements i{width:25px;height:25px;flex:none}
+.itemActions{margin-top:auto;padding-top:26px}
+.itemActions .shopLink{margin-top:0;min-height:48px;display:flex;align-items:center;justify-content:center;line-height:1.5}
+.itemActions small{display:block;margin-top:12px;font-size:10px;line-height:1.7;color:#6d7567}
+.objectCard:last-child:nth-child(odd){align-items:stretch}
+@media(max-width:760px){.objectCard:last-child,.objectCard:last-child:nth-child(odd){display:flex}.itemTraits>div{grid-template-columns:65px minmax(0,1fr);gap:8px}.itemActions{padding-top:22px}}
