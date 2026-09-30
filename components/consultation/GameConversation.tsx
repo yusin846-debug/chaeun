@@ -61,11 +61,11 @@ function Scene({reply,busy,compact=false,gate=false,opening=false,summaryAvailab
  return <>
  <div className={s.scene}>
   <div className={s.sceneShade}/>
-  
+
   <Portrait state={state}/>
-  
+
   {summaryAvailable&&<button className={s.noteBadge} onClick={onSummary}><Daisy className={s.flower}/> 중간 점검</button>}
-  
+
  </div>
  <section className={s.dialogue} aria-label="고양이의 대사">
   <div className={s.nameplate}><Daisy className={s.flower}/> 슈슈</div>
@@ -111,13 +111,13 @@ export function GameConversation({session,chart,busy,error,warning,onRetry,onSen
      <div className={s.checkpointHeading}><span>YOUR CURRENT FLOW · 지금의 흐름</span></div>
      <h2>{reply.summary.title}</h2>{reply.summary.blockages?.map(b=><div className={s.blockage} key={b.title}><span>보완할 상태</span><strong>{b.title}</strong><p>{b.experience}</p><small>{b.flow}</small></div>)}
      <div className={s.checkpointSteps}><article><span>01 · 지금 너의 마음</span><p>{reply.summary.desire}</p></article><article><span>02 · 사주로 읽은 흐름</span><p>{reply.summary.strength}</p></article><article><span>03 · 함께 채워볼 기운</span><p>{reply.summary.direction}</p>{reply.summary.elements.length>0&&<div className={s.energyTags}>{reply.summary.elements.map(el=><b key={el}><ElementBead element={el}/>{el}</b>)}</div>}</article></div>
-     
+
     </section>}
     {!!summary&&!busy&&<SpaceConsultation session={session} chart={chart}/>}
     {!summary&&!busy&&!waiting&&!error&&<form className={s.composer} onSubmit={e=>{e.preventDefault();send(draft)}}><label htmlFor="my-story" className={s.srOnly}>슈슈에게 답하기</label><div><textarea ref={input} id="my-story" rows={1} maxLength={2000} placeholder="슈슈에게 이야기해줘…" value={draft} disabled={busy||waiting} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.nativeEvent.isComposing&&window.matchMedia('(min-width: 761px)').matches){e.preventDefault();send(draft)}}}/><button type="submit" disabled={busy||waiting||!draft.trim()}>보내기 <Daisy className={s.flower}/></button></div></form>}
     </>}
    </Scene>
-   
+
   </div>
   {panel&&<PanelDialog title={{chart:'나를 이루는 기운',history:'우리가 나눈 이야기',summary:'중간 점검',settings:'이 방의 설정'}[panel]} onClose={()=>{setPanel(null);setConfirm(null)}}>
    {panel==='chart'&&(chart?<ChartCard chart={chart}/>:<p>원국을 펼치는 중이에요.</p>)}
