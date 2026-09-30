@@ -12,5 +12,5 @@ const crops={
 } as const;
 export function RoomDetail({visual,kind,name}:{visual:ReturnType<typeof roomVisual>;kind:'art'|'light'|'plant'|'fabric'|'tray';name:string}){
  const [x,y,w]=crops[visual.key][kind];
- return <div className={s.crop} role="img" aria-label={`추천 방 사진 속 ${name}`}><div style={{backgroundImage:`url(/images/consultation/jewels/${visual.file}.png)`,width:`${100/w}%`,left:`${-x/w*100}%`,top:`${-y/(w*1.125)*100}%`}}/></div>;
+ return <div className={s.crop} role="img" aria-label={`추천 방 사진 속 ${name}`}><div style={{backgroundImage:`url(/images/consultation/jewels/${visual.file}.png)`,width:`${100/w}%`,left:`${-x/w*100}%`,top:0,marginTop:`${-y/(w*1.5)*100}%`}}/></div>;
 }
