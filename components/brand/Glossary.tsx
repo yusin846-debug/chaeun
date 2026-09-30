@@ -13,7 +13,6 @@ const terms = [
 
 export function Glossary() {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
 
   return (
     <section className={styles.glossary} aria-labelledby="language-title">
@@ -24,13 +23,13 @@ export function Glossary() {
           {terms.map((term, index) => (
             <button key={term.title} aria-pressed={index === active} aria-controls="term-explanation"
               onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} onClick={() => setActive(index)}>
-              {term.title}<span aria-hidden="true">↗</span>
+              {term.title}
             </button>
           ))}
           <p>궁금한 단어에 머물거나 눌러보세요.</p>
         </div>
         <article id="term-explanation" className={styles.termPanel}>
-          <div className={glass.stage} data-paused={paused}>
+          <div className={glass.stage}>
             {terms.map((term, index) => (
               <div key={term.title} className={`${glass.object} ${index === active ? glass.active : ''}`} aria-hidden={index !== active}>
                 <div className={glass.float}>
@@ -38,9 +37,6 @@ export function Glossary() {
                 </div>
               </div>
             ))}
-            <button className={glass.motion} aria-pressed={paused} onClick={() => setPaused(!paused)}>
-              {paused ? '움직임 켜기' : '움직임 멈추기'}
-            </button>
           </div>
           <h3>{terms[active].korean}</h3>
           <p>{terms[active].body}</p>

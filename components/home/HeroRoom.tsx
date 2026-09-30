@@ -48,7 +48,7 @@ export function HeroRoom() {
   return <div className={styles.room} onKeyDown={event => { if (event.key === 'Escape') setActive(null); }}>
     <aside className={styles.flowNotice} aria-label="이 방에 담긴 풍수 이야기">
       <span className={styles.flowMark} aria-hidden="true">木 <i>→</i> 火 <i>→</i> 土</span>
-      <div><span className={styles.flowEyebrow}>FENG SHUI FOR A NEW CHAPTER</span><p><strong>목 → 화 → 토로 흐르는 기운을 개선하여,</strong><br />안정감과 용기, 그리고 새로운 인연에 대한 자신감을 북돋아 주는 풍수 인테리어.</p></div>
+      <div><span className={styles.flowEyebrow}>풍수 인테리어 예시 · FENG SHUI INSPIRATION</span><p><strong>목 → 화 → 토로 흐르는 기운을 개선하여,</strong><br />안정감과 용기, 그리고 새로운 인연에 대한 자신감을 북돋아 주는 풍수 인테리어.</p></div>
       <span className={styles.flowHint}>소품에 마우스를 올려보세요<span>모바일에서는 +를 눌러보세요 ↘</span></span>
     </aside>
     <div ref={photo} className={`${brand.heroPhoto} ${styles.photo}`} onPointerMove={event => {

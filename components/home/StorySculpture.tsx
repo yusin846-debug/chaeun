@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import styles from "./StorySculpture.module.css";
 
 const captions: Record<string, string> = {
@@ -14,8 +13,7 @@ const captions: Record<string, string> = {
 
 /** One native vector scene at a time: no layered photographs or external video. */
 export function StorySculpture({ topic }: { topic: string }) {
-  const [paused, setPaused] = useState(false);
-  return <div className={`${styles.stage} ${styles[topic]} ${paused ? styles.paused : ""}`}>
+  return <div className={`${styles.stage} ${styles[topic]}`}>
     <span className={styles.index}>THE SHAPE OF YOUR FEELING</span>
     <div className={styles.scene} key={topic}>
       <svg viewBox="0 0 500 440" role="img" aria-label={captions[topic]}>
@@ -36,6 +34,5 @@ export function StorySculpture({ topic }: { topic: string }) {
       </svg>
     </div>
     <p>{captions[topic]}</p>
-    <button className={styles.pause} onClick={() => setPaused(!paused)} aria-pressed={paused}>{paused ? "움직임 재생" : "움직임 멈추기"}</button>
   </div>;
 }

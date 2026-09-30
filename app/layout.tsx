@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Cormorant_Garamond, Noto_Serif_KR } from "next/font/google";
+import { Jua, Bricolage_Grotesque, Cormorant_Garamond, Noto_Serif_KR } from "next/font/google";
 import { SiteHeader } from "@/components/nav/SiteHeader";
 import "./globals.css";
+
+const gameDisplay = Jua({ variable: "--font-game-display", weight: "400", subsets: ["latin"], display: "swap" });
 
 const display = Bricolage_Grotesque({ variable: "--font-display", subsets: ["latin"], display: "swap" });
 
@@ -32,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${display.variable} ${notoSerifKR.variable} ${cormorantGaramond.variable} h-full antialiased`}
+      className={`${gameDisplay.variable} ${display.variable} ${notoSerifKR.variable} ${cormorantGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-cream text-ink">
         <SiteHeader />

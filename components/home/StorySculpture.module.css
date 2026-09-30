@@ -12,9 +12,3 @@
 @keyframes arrive { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 @media(max-width:760px) { .stage { padding:10px 15px; border-radius:60px 8px 8px 8px; }.index { display:none; }.stage p { font-size:10px; }.scene svg { max-height:230px; }.rest { border-radius:70px; } }
 @media(prefers-reduced-motion:reduce) { .stage * { animation:none!important; } }
-.paused * { animation-play-state:paused!important; }
-.pause { margin-top:10px; font-size:10px; color:#d8ddd6; border-bottom:1px solid #d8ddd655; cursor:pointer; }
-@media(max-width:760px) { .pause { margin-top:5px; font-size:9px; } }
-@media(prefers-reduced-motion:reduce) { .pause { display:none; } }
-/* Pausing loops must not freeze a newly selected scene at opacity zero. */
-.paused .scene { animation:none; opacity:1; transform:none; }
