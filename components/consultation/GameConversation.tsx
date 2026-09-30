@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { BrandStar } from '../brand/BrandStar';
 import { Daisy } from '../brand/Daisy';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { openingReply, topicOpeners } from '@/lib/consultation/opening';
@@ -94,7 +95,7 @@ export function GameConversation({session,chart,busy,error,warning,onRetry,onSen
 
  function send(text:string,topic?:Session['topic']){if(busy||waiting||!text.trim())return;onSend(text,topic);setDraft('')}
  return <main className={s.game} id="main-content">
-  <header className={s.toolbar}><Link href="/" className={s.logo} aria-label="채운 홈">chaeun<span>✳</span></Link><nav aria-label="상담 메뉴"><EnergyHUD chart={chart} support={session.space?.dashboard?.energy.map(e=>e.element)??[]} onOpen={()=>setPanel('chart')}/><button onClick={()=>setPanel('history')}>대화 기록</button><button aria-label="상담 설정" onClick={()=>setPanel('settings')}>☷</button></nav></header>
+  <header className={s.toolbar}><Link href="/" className={s.logo} aria-label="채운 홈">chaeun<span><BrandStar/></span></Link><nav aria-label="상담 메뉴"><EnergyHUD chart={chart} support={session.space?.dashboard?.energy.map(e=>e.element)??[]} onOpen={()=>setPanel('chart')}/><button onClick={()=>setPanel('history')}>대화 기록</button><button aria-label="상담 설정" onClick={()=>setPanel('settings')}>☷</button></nav></header>
   <div className={s.gameBody}>
    <h1 className={s.srOnly}>슈슈와 나누는 나의 이야기</h1>
    {warning&&<p role="status" className={s.warning}>{warning}</p>}
