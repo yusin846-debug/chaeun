@@ -1,6 +1,6 @@
 import { wantsNeighborhoods } from '@/lib/consultation/relocation';
 import OpenAI from 'openai';
-import { roomVisual } from '@/lib/consultation/room-visual';
+import { roomVisual, resolveRoomInput } from '@/lib/consultation/room-visual';
 import { selectNeighborhoodCandidates } from '@/lib/consultation/neighborhood-candidates';
 import { zodTextFormat } from 'openai/helpers/zod';
 import { chatSchema } from '@/lib/consultation/schema';
@@ -16,7 +16,8 @@ export async function POST(request:Request){
   guard(request);
   const parsed=requestSchema.safeParse(await readBody(request));
   if(!parsed.success)throw new HttpError(400,'동네와 방 구조를 확인해줘.');
-  const {birth,preferredName,topic,messages,space}=parsed.data;
+  const {birth,preferredName,topic,messages,space:requestedSpace}=parsed.data;
+  const space=resolveRoomInput(requestedSpace,preferredName);
   const summary=[...messages].reverse().find(m=>m.role==='assistant'&&m.reply.summary);
   if(!summary||summary.role!=='assistant')throw new HttpError(400,'먼저 슈슈와 기운의 흐름을 정리해줘.');
   if(!process.env.OPENAI_API_KEY?.trim())throw new HttpError(503,'공간 추천 연결을 준비 중이야. 잠시 후 다시 시도해줘.');
@@ -52,7 +53,7 @@ view는 사용자가 알려준 창밖 장면·채광에 맞는 커튼·빛 조�
   },{signal:request.signal});
   if(result.status!=='completed'||!result.output_parsed)throw new HttpError(502,'추천을 끝까지 만들지 못했어. 입력은 그대로 있으니 다시 시도해줘.');
   result.output_parsed.alternatives=(recommendNeighborhoods?result.output_parsed.alternatives:[]).flatMap(place=>{const candidate=candidates.find(c=>c.sourceUrl===place.sourceUrl);return candidate?[{...place,name:candidate.name,scope:candidate.scope}]:[];});
-  return Response.json({dashboard:result.output_parsed,research},{headers:{'Cache-Control':'no-store'}});
+  return Response.json({dashboard:result.output_parsed,research,input:space},{headers:{'Cache-Control':'no-store'}});
  }catch(error){
   if(error instanceof OpenAI.APIError){console.error('Space provider failure',{name:error.name,status:error.status,code:error.code,param:error.param,...(error.code==='invalid_json_schema'?{schemaError:error.message}:{})});return failure(new HttpError(error.status===429?429:502,'공간 추천 연결이 잠시 지연됐어. 입력은 그대로 두었으니 다시 시도해줘.'));}
   return failure(error);

@@ -2,7 +2,7 @@ import { z } from 'zod';
 export const spaceInputSchema=z.object({
  neighborhood:z.string().trim().max(80),
  recommendNeighborhoods:z.boolean().optional(),
- roomStyle:z.enum(['auto','coastal','vintage','pastel','gaming']).optional(),
+ roomStyle:z.enum(['auto','coastal','vintage','pastel','gaming','collector']).optional(),
  roomNotes:z.string().trim().max(600).optional(),
  layout:z.enum(['studio','separate','shared','unknown']),
  views:z.array(z.enum(['buildings','green','water','road','blocked'])).max(5),
